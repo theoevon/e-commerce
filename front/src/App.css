@@ -1,38 +1,97 @@
-.App {
-  text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body{
+  margin: 0; padding: 0; border: 0;
+  font-family: 'Julius Sans One', sans-serif;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+header{
+  background-color: #0A3782;
+  position: fixed;
+  width: 100%;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+#logo{
+  width: 250px;
+}
+.row{
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.container{
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#search{
+  width: 130%;
+  height: min-content;
+  padding: 10px;
+  margin: 0 5%;
+}
+#icon_account, #icon_panier{
+  filter: invert();
+  width: 30%;
+}
+#profil{
+  justify-content: right;
+}
+.info_icon{
   color: white;
+  margin: 0;
+  margin-bottom: 5px;
+}
+.account, .panier{
+  text-align: center;
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar{
+  background-color: #001e69;
+  width: 100%;
+  height: 3rem;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.body_article{
+  background-color: #eeeeee;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.container_article{
+  background-color: white;
+  padding: 2rem;
+  min-width: 90%;
+}
+.all_article{
+  display: flex;
+  flex-flow: row wrap;
+}
+.article{
+  min-width: 45%;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 1rem;
+  margin: 1%;
+  cursor: pointer;
+}
+.article:hover ~ p{
+  border-bottom: 1px solid #3B83EF;
+}
+.container_article{
+  margin-top: 10rem;
+}
+.container_article h1{
+  margin-left: 1%;
+}
+.container_article p{
+  color: #3B83EF;
+}
+.img_article img{
+  width: 264px;
+  height: 264px;
+}
+.row_article{
+  display: flex;
+}
+.row_article{
+  justify-content: space-between;
 }
