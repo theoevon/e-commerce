@@ -6,8 +6,10 @@ body{
 }
 header{
   background-color: #0A3782;
-  position: fixed;
   width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 #logo{
   width: 250px;
@@ -76,9 +78,6 @@ header{
 .article:hover ~ p{
   border-bottom: 1px solid #3B83EF;
 }
-.container_article{
-  margin-top: 10rem;
-}
 .container_article h1{
   margin-left: 1%;
 }
@@ -94,4 +93,86 @@ header{
 }
 .row_article{
   justify-content: space-between;
+}
+a{
+  text-decoration: none;
+  color: unset;
+  width: 100%;
+  text-align: center;
+}
+.en_tete{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  border-bottom: 1px solid black;
+}
+.body_ipad{
+  display: flex;
+}
+.left, .right{
+  width: 50%;
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+}
+.left{
+  align-items: center;
+}
+.right{
+  flex-direction: column;
+}
+.div_couleur{
+  display: flex;
+  flex-flow: row wrap;
+}
+.couleur{
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  min-width: 40%;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.couleur h3{
+  margin: 0;
+  margin-bottom: 1rem;
+}
+.titre_ipad{
+  margin: 1rem;
+}
+.titre_ipad h1{
+  margin-bottom: 4rem;
+}
+.titre_ipad h2{
+  margin: 0;
+}
+.rond_gris, .rond_bleu, .rond_rose, .rond_mauve, .rond_lumiere{
+  min-width: 32px;
+  max-width: 32px;
+  min-height: 32px;
+  max-height: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.rond_gris{
+  background-color: #737176;
+}
+.rond_bleu{
+  background-color: #90B4C3;
+}
+.rond_rose{
+  background-color: #E7D2CF;
+}
+.rond_mauve{
+  background-color: #BFBDD3;
+}
+.rond_lumiere{
+  background-color: #FAF7F2;
 }
