@@ -6,7 +6,9 @@ const Accueil  = () =>{
         <header>
           <div className="container">
             <div className="row">
-              <img src="https://cdn.discordapp.com/attachments/973872783320817744/1047108942397976636/image-removebg-preview.png" id="logo" alt="logo"></img>
+              <a href="/">
+                <img src="https://cdn.discordapp.com/attachments/973872783320817744/1047108942397976636/image-removebg-preview.png" id="logo" alt="logo"></img>
+              </a>
               <input type="text" placeholder="Recherche..." name="search" id="search"></input>
               <div className="profil row">
                 <a href="/connexion">
@@ -15,10 +17,12 @@ const Accueil  = () =>{
                     <p className="info_icon">Mon compte</p>
                   </div>
                 </a>
-                <div className="panier">
-                  <img src="https://cdn-icons-png.flaticon.com/512/481/481383.png" id="icon_panier" alt="icon_panier"></img>
-                  <p className="info_icon">Panier</p>
-                </div>
+                <a href="/panier">
+                  <div className="panier">
+                    <img src="https://cdn-icons-png.flaticon.com/512/481/481383.png" id="icon_panier" alt="icon_panier"></img>
+                    <p className="info_icon">Panier</p>
+                  </div>
+                </a>
               </div>
             </div>
           </div>
