@@ -26,6 +26,18 @@ class Article
     #[ORM\Column]
     private ?int $stock = null;
 
+    #[ORM\Column]
+    private ?int $id_category = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?int $id_subcategory = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $publish_date = null;
+
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $variants = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +87,54 @@ class Article
     public function setStock(int $stock): self
     {
         $this->stock = $stock;
+
+        return $this;
+    }
+
+    public function getIdCategory(): ?int
+    {
+        return $this->id_category;
+    }
+
+    public function setIdCategory(int $id_category): self
+    {
+        $this->id_category = $id_category;
+
+        return $this;
+    }
+
+    public function getIdSubcategory(): ?int
+    {
+        return $this->id_subcategory;
+    }
+
+    public function setIdSubcategory(?int $id_subcategory): self
+    {
+        $this->id_subcategory = $id_subcategory;
+
+        return $this;
+    }
+
+    public function getPublishDate(): ?string
+    {
+        return $this->publish_date;
+    }
+
+    public function setPublishDate(string $publish_date): self
+    {
+        $this->publish_date = $publish_date;
+
+        return $this;
+    }
+
+    public function getVariants(): ?string
+    {
+        return $this->variants;
+    }
+
+    public function setVariants(string $variants): self
+    {
+        $this->variants = $variants;
 
         return $this;
     }
