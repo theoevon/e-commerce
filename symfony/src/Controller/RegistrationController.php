@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Security\EmailVerifier;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 
 class RegistrationController extends AbstractController
 {
