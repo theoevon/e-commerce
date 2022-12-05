@@ -20,6 +20,7 @@ const Inscription = () => {
                     <div className="connexion">
                         <h2>VOS IDENTIFIANTS</h2>
                         <form action="" method="post">
+                            <input type="text" name="identifiant" id="identifiant" placeholder="VOTRE IDENTIFIANT" required></input> 
                             <input type="email" name="email" id="email" placeholder="VOTRE EMAIL" required></input>
                             <input type="password" name="password" id="password" placeholder="VOTRE MOT DE PASSE" required></input>
                             <input type="submit" id="submit" className="btn" value="CRÉEZ UN COMPTE"></input>

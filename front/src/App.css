@@ -11,6 +11,39 @@ header{
   top: 0;
   z-index: 1000;
 }
+footer{
+  background-color: #0A3782;
+  width: 100%;
+  color: white;
+}
+footer .img img{
+  max-width: 150px;
+  max-height: 100px;
+  filter: invert();
+}
+footer .text{
+  max-height: 140px;
+  margin-left: 1rem;
+  padding-top: 2rem;
+}
+footer .text h3{
+  margin: 0;
+}
+footer .text h4{
+  margin: 0;
+}
+.container_footer{
+  padding: 2rem;
+}
+.container_info_footer{
+  display: flex;
+}
+.info_footer{
+  display: flex;
+  margin-left: 1rem;
+  margin-right: 2rem;
+  padding: 1rem;
+}
 #logo{
   width: 250px;
 }
@@ -175,4 +208,30 @@ a{
 }
 .rond_lumiere{
   background-color: #FAF7F2;
+}
+footer hr{
+  border: 1px solid white;
+  margin: 0 auto;
+}
+.logo{
+  text-align: center;
+  margin: 2rem;
+}
+.logo p{
+  margin: 0;
+}
+.copyright img{
+  width: 64px;
+  margin: 0 1rem;
+}
+.copyright h3{
+  margin-right: 2rem;
+}
+#cadenas{
+  width: 32px;
+}
+.row_footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
