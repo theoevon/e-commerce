@@ -36,12 +36,12 @@ class RegistrationController extends AbstractController
 
         $hashedPassword = $passwordHasher->hashPassword(
             $user,
-            $request->request->get('password')
+            $request->toArray()['password']
         );
 
-        $user->setEmail($request->request->get('email'));
+        $user->setEmail($request->toArray()['email']);
         $user->setPassword($hashedPassword);
-        $user->setPseudo($request->request->get('pseudo'));
+        $user->setPseudo($request->toArray()['pseudo']);
         $user->setCreateAt(date("Y-m-d"));
         $user->setRoles(['ROLS_USER']);
         $entityManager->persist($user);
