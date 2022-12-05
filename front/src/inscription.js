@@ -1,6 +1,29 @@
 import './log.css';
+import axios from "axios";
+import React, { useState } from 'react';
+
 
 const Inscription = () => {
+
+    const [pseudo, setPseudo] = useState(null)
+    const [email, setEmail] = useState(null)
+    const [password, setPassword] = useState(null)
+
+    const sendData = async (e) => {
+        e.preventDefault();
+
+        axios.post("https://localhost:8000/register", {
+            pseudo: pseudo,
+            email: email,
+            password: password
+        })
+            .then((response) => {
+                if (response.data.status === "success") {
+                    alert(response.data.status)
+                }
+            })
+    }
+
     return (
         <div className='app'>
             <header>
@@ -19,10 +42,10 @@ const Inscription = () => {
                 <div className="container_form">
                     <div className="connexion">
                         <h2>VOS IDENTIFIANTS</h2>
-                        <form action="" method="post">
-                            <input type="text" name="identifiant" id="identifiant" placeholder="VOTRE IDENTIFIANT" required></input> 
-                            <input type="email" name="email" id="email" placeholder="VOTRE EMAIL" required></input>
-                            <input type="password" name="password" id="password" placeholder="VOTRE MOT DE PASSE" required></input>
+                        <form onSubmit={(e) => sendData(e)} action="" method="post">
+                            <input onChange={(e) => setPseudo(e.target.value)} type="text" name="identifiant" id="identifiant" placeholder="VOTRE IDENTIFIANT" required></input>
+                            <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" placeholder="VOTRE EMAIL" required></input>
+                            <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="VOTRE MOT DE PASSE" required></input>
                             <input type="submit" id="submit" className="btn" value="CRÉEZ UN COMPTE"></input>
                         </form>
                     </div>
