@@ -7,12 +7,22 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 
+#[Route('/article')]
 class ArticleController extends AbstractController
 {
-    #[Route('/article', name: 'app_article')]
+    #[Route('/')]
+    public function articles(ManagerRegistry $doctrine, Request $request): Response
+    {
+        $articles = $doctrine->getRepository(Article::class)->fetchArticles();
+        
+        return new Response(json_encode($article));
+    }
+
+    #[Route('/add', name: 'app_article')]
     public function article(Request $request, EntityManagerInterface $entityManager): Response
     {
         $arr = [];
@@ -43,4 +53,5 @@ class ArticleController extends AbstractController
 
         return new Response($arr_json);
     }
+
 }
