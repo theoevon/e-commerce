@@ -24,9 +24,6 @@ class Article
     private ?int $prix = null;
 
     #[ORM\Column]
-    private ?int $stock = null;
-
-    #[ORM\Column]
     private ?int $id_category = null;
 
     #[ORM\Column(nullable: true)]
@@ -34,13 +31,7 @@ class Article
 
     #[ORM\Column(length: 255)]
     private ?string $publish_date = null;
-
-    #[ORM\Column(type: Types::TEXT)]
-    private ?string $variants = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $url = null;
-
+ 
     public function getId(): ?int
     {
         return $this->id;
@@ -129,28 +120,5 @@ class Article
 
         return $this;
     }
-
-    public function getVariants(): ?string
-    {
-        return $this->variants;
-    }
-
-    public function setVariants(string $variants): self
-    {
-        $this->variants = $variants;
-
-        return $this;
-    }
-
-    public function getUrl(): ?string
-    {
-        return $this->url;
-    }
-
-    public function setUrl(string $url): self
-    {
-        $this->url = $url;
-
-        return $this;
-    }
+    
 }

@@ -12,22 +12,20 @@ use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ArticleRepository;
 
-#[Route('/article')]
 class ArticleController extends AbstractController
 {
-    #[Route('/')]
-    public function articles(ManagerRegistry $doctrine, Request $request): Response
-    {
-        $articles = $doctrine->getRepository(Article::class)->fetchArticles();
-        
-        return new Response(json_encode($article));
-    }
+    // #[Route('/')]
+    // public function articles(ManagerRegistry $doctrine, Request $request): Response
+    // {
+    //     $articles = $doctrine->getRepository(Article::class)->fetchArticles();
 
-    #[Route('/add', name: 'app_article')]
+    //     return new Response(json_encode($articles));
+    // }
+
+    #[Route('/addArtcle', name: 'app_article')]
     public function article(Request $request, EntityManagerInterface $entityManager): Response
     {
         $arr = [];
-
         $article = new Article();
 
         $file = "./file.json";
@@ -35,13 +33,10 @@ class ArticleController extends AbstractController
         $data = json_decode($file);
         foreach ($data as $key_1 => $val_1) {
             $article->setName($key_1);
-            $article->setUrl($val_1->url);
             $article->setPrix($val_1->prix);
             $article->setDescription($val_1->caracteristique);
-            $article->setStock(5);
             $article->setIdCategory(1);
             $article->setIdSubcategory(2);
-            $article->setVariants(1);
             $article->setPublishDate(date("Y-m-d"));
             $entityManager->persist($article);
             $entityManager->flush();
@@ -74,27 +69,36 @@ class ArticleController extends AbstractController
         return new Response('');
     }
 
-    #[Route('/showArticle', name: 'app_article_api')]
-    public function article_api(ArticleRepository $articles): Response
+    #[Route('/showArticle/{id?}', name: 'app_article_api')]
+    public function article_api($id, ArticleRepository $articles): Response
     {
         $arr = [];
         $arr_api = [];
+        if ($id != null) {
+
+            $data = $articles->find($id);
+                $arr['name'] = $data->getName();
+                $arr['description'] = $data->getDescription();
+                $arr['prix'] = $data->getPrix();
+                $arr['id_category'] = $data->getIdCategory();
+                $arr['id_subcategory'] = $data->getIdSubcategory();
+                $arr['publish_date'] = $data->getPublishDate();
+                $arr_api[$data->getId()] = $arr;
+            $arr_json = json_encode($arr_api);
+            return new Response($arr_json);
+        }
+
         $data = $articles->findAll();
-    
         foreach ($data as $value) {
             $arr['name'] = $value->getName();
-            $arr['url'] = $value->getUrl();
-            $arr['variants'] = $value->getVariants();
             $arr['description'] = $value->getDescription();
             $arr['prix'] = $value->getPrix();
-            $arr['stock'] = $value->getStock();
             $arr['id_category'] = $value->getIdCategory();
             $arr['id_subcategory'] = $value->getIdSubcategory();
             $arr['publish_date'] = $value->getPublishDate();
-            $arr_api[$value->getId()] = $arr; 
+            $arr_api[$value->getId()] = $arr;
         }
         $arr_json = json_encode($arr_api);
         return new Response($arr_json);
     }
-
 }
