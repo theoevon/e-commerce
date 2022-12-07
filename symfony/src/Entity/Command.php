@@ -108,4 +108,9 @@ class Command
 
         return $this;
     }
+
+    public function getIsgift(): ?string
+    {
+        return $this->isgift;
+    }
 }

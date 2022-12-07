@@ -13,27 +13,15 @@ class SubCategory
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $id_parent_category = null;
-
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[ORM\ManyToOne(inversedBy: 'subCategories')]
+    private ?Category $category = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdParentCategory(): ?int
-    {
-        return $this->id_parent_category;
-    }
-
-    public function setIdParentCategory(int $id_parent_category): self
-    {
-        $this->id_parent_category = $id_parent_category;
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -44,6 +32,18 @@ class SubCategory
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

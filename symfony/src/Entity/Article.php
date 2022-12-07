@@ -38,6 +38,9 @@ class Article
     #[ORM\Column(type: Types::TEXT)]
     private ?string $variants = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $url = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -135,6 +138,18 @@ class Article
     public function setVariants(string $variants): self
     {
         $this->variants = $variants;
+
+        return $this;
+    }
+
+    public function getUrl(): ?string
+    {
+        return $this->url;
+    }
+
+    public function setUrl(string $url): self
+    {
+        $this->url = $url;
 
         return $this;
     }

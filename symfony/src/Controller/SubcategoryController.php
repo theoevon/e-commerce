@@ -2,40 +2,39 @@
 
 namespace App\Controller;
 
-use App\Entity\SubCategory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
-
+use App\Entity\SubCategory;
+use App\Repository\CategoryRepository;
+use App\Repository\SubCategoryRepository;
 
 class SubcategoryController extends AbstractController
 {
     #[Route('/subcategory', name: 'app_subcategory')]
-    public function subcategory(Request $request, EntityManagerInterface $entityManager): Response
+    public function subcategory(Request $request, EntityManagerInterface $doctrine, CategoryRepository $categoryRepository): Response
     {
-        $arr = [];
-
         $subcategory = new SubCategory();
-        $subcategory->setIdParentCategory($request->toArray()['id_parent_category']);
         $subcategory->setName($request->toArray()['name']);
 
-        $entityManager->persist($subcategory);
-        try {
-            $entityManager->flush();
-        } catch (Exception $e) {
+        $data = $categoryRepository->findOneBy(['name' => $request->toArray()['category']]);
 
-            $arr["status"] = "error";
-            $arr["message"] = "Champs non remplis ou type de donnée non valide ";
-            $arr_json = json_encode($arr);
-            return new Response($arr_json);
-        }
+        $subcategory->setCategory($data);
 
-        $arr["status"] = "success";
-        $arr_json = json_encode($arr);
+        $doctrine->persist($subcategory);
+        $doctrine->flush();
 
-        return new Response($arr_json);
+        return new Response();
+    }
+
+    #[Route('/showSubCategory', name: 'app_showSubcategory_api')]
+    public function showSubcategory(SubCategoryRepository $subCategoryRepository): Response
+    {
+        $data = $subCategoryRepository->findOneBy(['name' => 'annilator_R2']);
+        var_dump($data);
+        return new Response('coucou');
     }
 }
