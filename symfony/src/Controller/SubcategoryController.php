@@ -36,26 +36,30 @@ class SubcategoryController extends AbstractController
             return new Response($arr_json);
         }
 
-        $arr["status"] = "success";
-        $arr_json = json_encode($arr);
+        $arrStatus["status"] = "success";
 
-        return new Response($arr_json);
+        return new Response(json_encode($arrStatus));
     }
 
-    #[Route('/showSubCategory', name: 'app_showSubcategory_api')]
-    public function showSubcategory(SubCategoryRepository $subCategoryRepository): Response
+    #[Route('/showSubCategory/{id?}', name: 'app_showSubcategory_api')]
+    public function showSubcategory($id, SubCategoryRepository $subCategoryRepository): Response
     {
         $data = $subCategoryRepository->findAll();
         $arr = [];
         $arr_api = [];
-        foreach ($data as $value) {
-            $arr['name'] = $value->getName();
-            $arr['category'] = $value->getCategory()->getName();
-            $arr_api[$value->getId()] = $arr;
+
+        if ($id != null) {
+            $valueSubCategory = $subCategoryRepository->find($id);
+            $arr['name'] = $valueSubCategory->getName();
+            $arr['category'] = $valueSubCategory->getCategory()->getName();
+            $arr_api[$id] = $arr;
+        } else {
+            foreach ($data as $value) {
+                $arr['name'] = $value->getName();
+                $arr['category'] = $value->getCategory()->getName();
+                $arr_api[$value->getId()] = $arr;
+            }
         }
-
-        $arr_json = json_encode($arr_api);
-
-        return new Response($arr_json);
+        return new Response(json_encode($arr_api));
     }
 }

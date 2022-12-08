@@ -13,35 +13,36 @@ use App\Repository\CategoryRepository;
 
 class CategoryController extends AbstractController
 {
+    #[Route('/addCategory', name: 'app_category')]
     public function category(request $request, EntityManagerInterface $entityManager): Response
     {
-        $arr = [];
-
+        //request => name
         $category = new Category();
         $category->setName($request->toArray()['name']);
         $entityManager->persist($category);
         try {
             $entityManager->flush();
         } catch (Exception $e) {
-            $arr["status"] = "error";
-            $arr["message"] = "Champs non remplis ou type de donnée non valide ";
-            $arr_json = json_encode($arr);
-            return new Response($arr_json);
+            $arrStatus["status"] = "error";
+            $arrStatus["message"] = "Champs non remplis ou type de donnée non valide ";
+            return new Response(json_encode($arrStatus));
         }
-
-        $arr["status"] = "success";
-        $arr_json = json_encode($arr);
-
-        return new Response($arr_json);
+        $arrStatus["status"] = "success";
+        return new Response(json_encode($arrStatus));
     }
 
-    #[Route('/showCategory', name: 'app_category_api')]
-    function showCategory(CategoryRepository $category):Response
+    #[Route('/showCategory/{id?}', name: 'app_category_api')]
+    function showCategory($id, CategoryRepository $category): Response
     {
-        $data = $category->findAll();
         $arr_api = [];
-        foreach($data as $value) {
-            $arr_api[$value->getId()] = $value->getName();
+        if ($id != null) {
+            $valueCategory = $category->find($id);
+            $arr_api[$valueCategory->getId()] = $valueCategory->getName();
+        } else {
+            $data = $category->findAll();
+            foreach ($data as $valueCategory) {
+                $arr_api[$valueCategory->getId()] = $valueCategory->getName();
+            }
         }
         $arr_json = json_encode($arr_api);
         return new Response($arr_json);

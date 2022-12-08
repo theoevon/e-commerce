@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
 
 class ArticleController extends AbstractController
 {
@@ -23,7 +24,7 @@ class ArticleController extends AbstractController
     // }
 
     #[Route('/addArtcle', name: 'app_article')]
-    public function article(Request $request, EntityManagerInterface $entityManager): Response
+    public function article(Request $request, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository): Response
     {
         $arr = [];
         $article = new Article();
@@ -32,6 +33,8 @@ class ArticleController extends AbstractController
         $file = file_get_contents($file);
         $data = json_decode($file);
         foreach ($data as $key_1 => $val_1) {
+            $dataCategory = $categoryRepository->findOneBy(['name' => $val_1->category]);
+            $article->setCategory($dataCategory);
             $article->setName($key_1);
             $article->setPrix($val_1->prix);
             $article->setDescription($val_1->caracteristique);
@@ -73,26 +76,24 @@ class ArticleController extends AbstractController
         $arr = [];
         $arr_api = [];
         if ($id != null) {
-
-            $data = $articles->find($id);
-                $arr['name'] = $data->getName();
-                $arr['description'] = $data->getDescription();
-                $arr['prix'] = $data->getPrix();
-                $arr['publish_date'] = $data->getPublishDate();
-                $arr_api[$data->getId()] = $arr;
-            $arr_json = json_encode($arr_api);
-            return new Response($arr_json);
+            $valueArticle = $articles->find($id);
+            $arr['name'] = $valueArticle->getName();
+            $arr['description'] = $valueArticle->getDescription();
+            $arr['prix'] = $valueArticle->getPrix();
+            $arr['publish_date'] = $valueArticle->getPublishDate();
+            $arr['category'] = $valueArticle->getCategory()->getName();
+            $arr_api[$valueArticle->getId()] = $arr;
+        } else {
+            $data = $articles->findAll();
+            foreach ($data as $valueArticle) {
+                $arr['name'] = $valueArticle->getName();
+                $arr['description'] = $valueArticle->getDescription();
+                $arr['prix'] = $valueArticle->getPrix();
+                $arr['publish_date'] = $valueArticle->getPublishDate();
+                $arr['category'] = $valueArticle->getCategory()->getName();
+                $arr_api[$valueArticle->getId()] = $arr;
+            }
         }
-
-        $data = $articles->findAll();
-        foreach ($data as $value) {
-            $arr['name'] = $value->getName();
-            $arr['description'] = $value->getDescription();
-            $arr['prix'] = $value->getPrix();
-            $arr['publish_date'] = $value->getPublishDate();
-            $arr_api[$value->getId()] = $arr;
-        }
-        $arr_json = json_encode($arr_api);
-        return new Response($arr_json);
+        return new Response(json_encode($arr_api));
     }
 }

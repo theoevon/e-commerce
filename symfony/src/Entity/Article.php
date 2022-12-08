@@ -25,6 +25,12 @@ class Article
 
     #[ORM\Column(length: 255)]
     private ?string $publish_date = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Category $category = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?SubCategory $subCategory = null;
  
     public function getId(): ?int
     {
@@ -75,6 +81,30 @@ class Article
     public function setPublishDate(string $publish_date): self
     {
         $this->publish_date = $publish_date;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getSubCategory(): ?SubCategory
+    {
+        return $this->subCategory;
+    }
+
+    public function setSubCategory(?SubCategory $subCategory): self
+    {
+        $this->subCategory = $subCategory;
 
         return $this;
     }
