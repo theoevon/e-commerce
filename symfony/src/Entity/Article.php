@@ -23,12 +23,6 @@ class Article
     #[ORM\Column]
     private ?int $prix = null;
 
-    #[ORM\Column]
-    private ?int $id_category = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $id_subcategory = null;
-
     #[ORM\Column(length: 255)]
     private ?string $publish_date = null;
  
@@ -69,42 +63,6 @@ class Article
     public function setPrix(int $prix): self
     {
         $this->prix = $prix;
-
-        return $this;
-    }
-
-    public function getStock(): ?int
-    {
-        return $this->stock;
-    }
-
-    public function setStock(int $stock): self
-    {
-        $this->stock = $stock;
-
-        return $this;
-    }
-
-    public function getIdCategory(): ?int
-    {
-        return $this->id_category;
-    }
-
-    public function setIdCategory(int $id_category): self
-    {
-        $this->id_category = $id_category;
-
-        return $this;
-    }
-
-    public function getIdSubcategory(): ?int
-    {
-        return $this->id_subcategory;
-    }
-
-    public function setIdSubcategory(?int $id_subcategory): self
-    {
-        $this->id_subcategory = $id_subcategory;
 
         return $this;
     }

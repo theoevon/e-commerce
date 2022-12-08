@@ -14,9 +14,11 @@ use App\Repository\SubCategoryRepository;
 
 class SubcategoryController extends AbstractController
 {
-    #[Route('/subcategory', name: 'app_subcategory')]
-    public function subcategory(Request $request, EntityManagerInterface $doctrine, CategoryRepository $categoryRepository): Response
+    #[Route('/addSubCategory', name: 'app_subcategory')]
+    public function subcategory(Request $request, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository): Response
     {
+        //data request => name , category
+
         $subcategory = new SubCategory();
         $subcategory->setName($request->toArray()['name']);
 
@@ -24,17 +26,36 @@ class SubcategoryController extends AbstractController
 
         $subcategory->setCategory($data);
 
-        $doctrine->persist($subcategory);
-        $doctrine->flush();
+        $entityManager->persist($subcategory);
+        try {
+            $entityManager->flush();
+        } catch (Exception $e) {
+            $arr["status"] = "error";
+            $arr["message"] = "Champs non remplis ou type de donnée non valide ";
+            $arr_json = json_encode($arr);
+            return new Response($arr_json);
+        }
 
-        return new Response();
+        $arr["status"] = "success";
+        $arr_json = json_encode($arr);
+
+        return new Response($arr_json);
     }
 
     #[Route('/showSubCategory', name: 'app_showSubcategory_api')]
     public function showSubcategory(SubCategoryRepository $subCategoryRepository): Response
     {
-        $data = $subCategoryRepository->findOneBy(['name' => 'annilator_R2']);
-        var_dump($data);
-        return new Response('coucou');
+        $data = $subCategoryRepository->findAll();
+        $arr = [];
+        $arr_api = [];
+        foreach ($data as $value) {
+            $arr['name'] = $value->getName();
+            $arr['category'] = $value->getCategory()->getName();
+            $arr_api[$value->getId()] = $arr;
+        }
+
+        $arr_json = json_encode($arr_api);
+
+        return new Response($arr_json);
     }
 }

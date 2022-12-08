@@ -13,7 +13,6 @@ use App\Repository\CategoryRepository;
 
 class CategoryController extends AbstractController
 {
-    #[Route('/category', name: 'app_category')]
     public function category(request $request, EntityManagerInterface $entityManager): Response
     {
         $arr = [];
@@ -40,7 +39,11 @@ class CategoryController extends AbstractController
     function showCategory(CategoryRepository $category):Response
     {
         $data = $category->findAll();
-        var_dump($data[0]);
-        return new Response("couocu");
+        $arr_api = [];
+        foreach($data as $value) {
+            $arr_api[$value->getId()] = $value->getName();
+        }
+        $arr_json = json_encode($arr_api);
+        return new Response($arr_json);
     }
 }

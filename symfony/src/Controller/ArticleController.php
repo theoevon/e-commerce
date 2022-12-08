@@ -35,8 +35,6 @@ class ArticleController extends AbstractController
             $article->setName($key_1);
             $article->setPrix($val_1->prix);
             $article->setDescription($val_1->caracteristique);
-            $article->setIdCategory(1);
-            $article->setIdSubcategory(2);
             $article->setPublishDate(date("Y-m-d"));
             $entityManager->persist($article);
             $entityManager->flush();
@@ -80,8 +78,6 @@ class ArticleController extends AbstractController
                 $arr['name'] = $data->getName();
                 $arr['description'] = $data->getDescription();
                 $arr['prix'] = $data->getPrix();
-                $arr['id_category'] = $data->getIdCategory();
-                $arr['id_subcategory'] = $data->getIdSubcategory();
                 $arr['publish_date'] = $data->getPublishDate();
                 $arr_api[$data->getId()] = $arr;
             $arr_json = json_encode($arr_api);
@@ -93,8 +89,6 @@ class ArticleController extends AbstractController
             $arr['name'] = $value->getName();
             $arr['description'] = $value->getDescription();
             $arr['prix'] = $value->getPrix();
-            $arr['id_category'] = $value->getIdCategory();
-            $arr['id_subcategory'] = $value->getIdSubcategory();
             $arr['publish_date'] = $value->getPublishDate();
             $arr_api[$value->getId()] = $arr;
         }
