@@ -23,14 +23,14 @@ class Article
     #[ORM\Column]
     private ?int $prix = null;
 
-    #[ORM\Column]
-    private ?int $id_category = null;
-
-    #[ORM\Column(nullable: true)]
-    private ?int $id_subcategory = null;
-
     #[ORM\Column(length: 255)]
     private ?string $publish_date = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Category $category = null;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?SubCategory $subCategory = null;
  
     public function getId(): ?int
     {
@@ -73,42 +73,6 @@ class Article
         return $this;
     }
 
-    public function getStock(): ?int
-    {
-        return $this->stock;
-    }
-
-    public function setStock(int $stock): self
-    {
-        $this->stock = $stock;
-
-        return $this;
-    }
-
-    public function getIdCategory(): ?int
-    {
-        return $this->id_category;
-    }
-
-    public function setIdCategory(int $id_category): self
-    {
-        $this->id_category = $id_category;
-
-        return $this;
-    }
-
-    public function getIdSubcategory(): ?int
-    {
-        return $this->id_subcategory;
-    }
-
-    public function setIdSubcategory(?int $id_subcategory): self
-    {
-        $this->id_subcategory = $id_subcategory;
-
-        return $this;
-    }
-
     public function getPublishDate(): ?string
     {
         return $this->publish_date;
@@ -117,6 +81,30 @@ class Article
     public function setPublishDate(string $publish_date): self
     {
         $this->publish_date = $publish_date;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getSubCategory(): ?SubCategory
+    {
+        return $this->subCategory;
+    }
+
+    public function setSubCategory(?SubCategory $subCategory): self
+    {
+        $this->subCategory = $subCategory;
 
         return $this;
     }
