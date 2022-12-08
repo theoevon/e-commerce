@@ -30,6 +30,9 @@ class ArticleController extends AbstractController
     #[Route('/addArticle/{file?}', name: 'app_article')]
     public function article($file, Request $request, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository): Response
     {
+        //request => prix , description , category , name , subcategory , 
+        //variant => {color , size , price , weight , name , image => {filename , uuid}}
+
         $article = new Article();
         $variant = new Variant();
         $image = new Image();
@@ -78,11 +81,11 @@ class ArticleController extends AbstractController
                 $this->articleVariant($request->toArray()['variant'], $variant, $image, "request");
                 $article->addVariant($variant);
                 $entityManager->persist($variant);
-                // $entityManager->persist($image);
+                $entityManager->persist($image);
             }
             $entityManager->persist($article);
             try {
-                // $entityManager->flush();
+                $entityManager->flush();
             } catch (Exception $e) {
                 $arr["status"] = "error";
                 $arr["message"] = "Champs non remplis ou type de donnée non valide ";
@@ -115,9 +118,9 @@ class ArticleController extends AbstractController
             $variant->setPrice($valueVariant['price']);
             $variant->setWeight($valueVariant['weight']);
             $variant->setName($valueVariant['name']);
-            // $image->setCle($valueVariant['image']['uuid']);
-            // $image->setCle($valueVariant['image']['fileName']);
-            // $variant->addImage($image);
+            $image->setCle($valueVariant['image']['uuid']);
+            $image->setCle($valueVariant['image']['fileName']);
+            $variant->addImage($image);
         }
     }
 
