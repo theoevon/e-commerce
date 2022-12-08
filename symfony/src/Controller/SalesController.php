@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SalesController extends AbstractController
 {
-    #[Route('/sales', name: 'app_sales')]
+    #[Route('/addSales', name: 'app_sales')]
     public function sales(Request $request, EntityManagerInterface $entityManager): Response
     {
         $arr = [];
@@ -31,9 +31,7 @@ class SalesController extends AbstractController
             return new Response($arr_json);
         }
 
-        $arr["status"] = "success";
-        $arr_json = json_encode($arr);
-
-        return new Response($arr_json);
+        $arrStatus["status"] = "success";
+        return new Response(json_encode($arrStatus));
     }
 }
