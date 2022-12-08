@@ -25,10 +25,7 @@
 /front/node_modules
 /front/.pnp
 /front/.pnp.js
-/front/src/Admin.js
-/front/src/posts.js
-/front/src/users.js
-/front/src/App.js
+
 
 
 # testing
