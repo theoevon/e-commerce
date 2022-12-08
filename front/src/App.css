@@ -229,6 +229,7 @@ footer hr{
 }
 #cadenas{
   width: 32px;
+  filter: invert();
 }
 .row_footer{
   display: flex;
