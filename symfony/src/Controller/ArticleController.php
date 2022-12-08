@@ -77,7 +77,7 @@ class ArticleController extends AbstractController
             $article->setPrix($request->toArray()['prix']);
             $article->setDescription($request->toArray()['description']);
             $article->setPublishDate(date("Y-m-d"));
-            if(isset($request->toArray()['variant'])) {
+            if (isset($request->toArray()['variant'])) {
                 $this->articleVariant($request->toArray()['variant'], $variant, $image, "request");
                 $article->addVariant($variant);
                 $entityManager->persist($variant);
@@ -102,7 +102,7 @@ class ArticleController extends AbstractController
 
     public function articleVariant($valueVariant, $variant, $image,  $req)
     {
-        if($req == "file") {
+        if ($req == "file") {
             $variant->setColor($valueVariant->color);
             $variant->setSize($valueVariant->size);
             $variant->setPrice($valueVariant->price);
@@ -111,8 +111,7 @@ class ArticleController extends AbstractController
             $image->setCle($valueVariant->image->uuid);
             $image->setFilename($valueVariant->image->fileName);
             $variant->addImage($image);
-        }
-        else {
+        } else {
             $variant->setColor($valueVariant['color']);
             $variant->setSize($valueVariant['size']);
             $variant->setPrice($valueVariant['price']);
@@ -139,10 +138,10 @@ class ArticleController extends AbstractController
             $arr['category'] = $valueArticle->getCategory()->getName();
             $arr['subCategory'] = $valueArticle->getSubCategory()->getName();
             $valueVariant = $variantRepository->findOneBy(['article' => $valueArticle->getId()]);
-            $valueImage = $imageRepository->findOneBy(['variant' =>$valueVariant->getId()]);
+            $valueImage = $imageRepository->findOneBy(['variant' => $valueVariant->getId()]);
             $arr['image_url'] = $valueImage->getUuid();
             $arr['image_name'] = $valueImage->getFilename();
-            $arr_api[$valueArticle->getId()] = $arr;
+            array_push($arr_api, $arr);
         } else {
             $data = $articles->findAll();
             foreach ($data as $valueArticle) {
@@ -152,7 +151,11 @@ class ArticleController extends AbstractController
                 $arr['publish_date'] = $valueArticle->getPublishDate();
                 $arr['category'] = $valueArticle->getCategory()->getName();
                 $arr['subCategory'] = $valueArticle->getSubCategory()->getName();
-                $arr_api[$valueArticle->getId()] = $arr;
+                $valueVariant = $variantRepository->findOneBy(['article' => $valueArticle->getId()]);
+                $valueImage = $imageRepository->findOneBy(['variant' => $valueVariant->getId()]);
+                $arr['image_url'] = $valueImage->getUuid();
+                $arr['image_name'] = $valueImage->getFilename();
+                array_push($arr_api, $arr);
             }
         }
         return new Response(json_encode($arr_api));
