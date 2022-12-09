@@ -12,7 +12,7 @@ const Inscription = () => {
     const sendData = async (e) => {
         e.preventDefault();
 
-        axios.post("https://localhost:8000/register", {
+        axios.post("http://localhost:8000/register", {
             pseudo: pseudo,
             email: email,
             password: password

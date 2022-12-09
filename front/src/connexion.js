@@ -1,5 +1,5 @@
 import './log.css';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
 
 const Connexion = () => {
@@ -10,7 +10,7 @@ const Connexion = () => {
     const sendData = async (e) => {
         e.preventDefault();
 
-        axios.post("https://localhost:8000/login", {
+        axios.post("http://localhost:8000/login", {
             email: email,
             password: password
         })
