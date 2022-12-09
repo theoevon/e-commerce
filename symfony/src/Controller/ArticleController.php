@@ -12,6 +12,7 @@ use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\ArticleRepository;
 use App\Repository\CategoryRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class ArticleController extends AbstractController
 {
@@ -94,6 +95,7 @@ class ArticleController extends AbstractController
                 $arr_api[$valueArticle->getId()] = $arr;
             }
         }
-        return new Response(json_encode($arr_api));
+        $response = new JsonResponse($arr_api);
+        return $response;
     }
 }
