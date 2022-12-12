@@ -18,15 +18,17 @@ use App\Repository\ImageRepository;
 use App\Repository\VariantRepository;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
+
 class ArticleController extends AbstractController
 {
-    // #[Route('/')]
+    // #[Route('/' , name: 'test')]
     // public function articles(ManagerRegistry $doctrine, Request $request): Response
     // {
     //     $articles = $doctrine->getRepository(Article::class)->fetchArticles();
 
     //     return new Response(json_encode($articles));
     // }
+
 
     #[Route('/addArticle/{file?}', name: 'app_article')]
     public function article($file, Request $request, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository): Response
