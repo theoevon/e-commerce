@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SubCategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SubCategoryRepository::class)]
@@ -13,27 +15,23 @@ class SubCategory
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $id_parent_category = null;
-
-    #[ORM\Column(length: 30)]
+    #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[ORM\ManyToOne(inversedBy: 'subCategories')]
+    private ?Category $category = null;
+
+    #[ORM\OneToMany(mappedBy: 'subCategory', targetEntity: Article::class)]
+    private Collection $articles;
+
+    public function __construct()
+    {
+        $this->articles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdParentCategory(): ?int
-    {
-        return $this->id_parent_category;
-    }
-
-    public function setIdParentCategory(int $id_parent_category): self
-    {
-        $this->id_parent_category = $id_parent_category;
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -44,6 +42,48 @@ class SubCategory
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Article>
+     */
+    public function getArticles(): Collection
+    {
+        return $this->articles;
+    }
+
+    public function addArticle(Article $article): self
+    {
+        if (!$this->articles->contains($article)) {
+            $this->articles->add($article);
+            $article->setSubCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticle(Article $article): self
+    {
+        if ($this->articles->removeElement($article)) {
+            // set the owning side to null (unless already changed)
+            if ($article->getSubCategory() === $this) {
+                $article->setSubCategory(null);
+            }
+        }
 
         return $this;
     }

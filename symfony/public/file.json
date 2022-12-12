@@ -1,0 +1,136 @@
+{
+    "tablette": {
+        "ipad": {
+            "prix": 789,
+            "caracteristique":"Puce M1 Appareil photo grand‑angle 12 Mpx, 12 Mpx Caméra avant ultra grand‑angle, Connecteur USB‑C, Téléchargements ultra‑rapides, streaming de haute qualité, Stockage jusqu’à 256 Go, Compatible avec l'Apple Pencil (2ᵉ génération), Compatible avec le Magic Keyboard et le Smart Keyboard Folio",
+            "category":"tablette",
+            "subCategory": "annilator_R2",
+            "variant": {
+                "bleu":{
+                    "size": 111,
+                    "price": "50",
+                    "weight": 46,
+                    "name": "test_1",
+                    "image":{
+                        "fileName": "ipad",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1047511335551897691/ipad-air-select-wifi-blue-202203.png" 
+                    }
+                },
+                "gris":{
+                    "size": 111,
+                    "price": "50",
+                    "weight": 46,
+                    "name": "test_1",
+                    "image":{
+                        "fileName": "ipad",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1047511305688457236/ipad-air-select-wifi-spacegray-202203.png" 
+                    }
+                },
+                "rose":{
+                    "size": 111,
+                    "price": "50",
+                    "weight": 46,
+                    "name": "test_1",
+                    "image":{
+                        "fileName": "ipad",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1047511323702996992/ipad-air-select-wifi-pink-202203.png" 
+                    } 
+                },
+                "violet":{
+                    "size": 111,
+                    "price": "50",
+                    "weight": 46,
+                    "name": "test_1",
+                    "image":{
+                        "fileName": "ipad",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1047511349326000168/ipad-air-select-wifi-purple-202203.png" 
+                    } 
+                },
+                "lumiere_stellaire":{
+                    "size": 111,
+                    "price": "50",
+                    "weight": 46,
+                    "name": "test_1",
+                    "image":{
+                        "fileName": "ipad",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1047511374869303296/ipad-air-select-wifi-starlight-202203.png" 
+                    }  
+                }
+            }
+        }
+    },
+    "ordinateur portable": {
+        "PC portable ACER NITRO 5 AN515-57-51K6": {
+            "prix": 999.99,
+            "caracteristique":"Ecran 15,6\" Full HD 144 Hz, Processeur Intel Core™ i5-11400H (6 coeurs, 2,2 GHz / Turbo Boost jusqu'à 4,5 GHz), RAM 16 Go DDR4 - 512 Go SSD - carte graphique NVidia GeForce RTX 3060 6 Go GDDR6, Windows 11 - HDMI - Wifi 802.11 ax - BT 5.1\"",
+            "category":"ordinateur portable",
+            "subCategory": "annilator_R2",
+            "variant": {
+                "noir":{
+                    "size": 111,
+                    "price": "50",
+                    "weight": 46,
+                    "name": "test_1",
+                    "image":{
+                        "fileName": "acer nitro 5",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1049676506344980541/acer_an515_i5_16.png"
+                    }
+                }
+            }
+        },
+        "PC portable ASUS ROG FLOW Z13 GZ301ZC-LD092W": {
+            "prix": 1299.99 ,
+            "caracteristique":"Ecran 13,4\" WUXGA, Processeur Intel® Core™ i7, RAM 16 Go DDR4 - 512 Go SSD, Windows 11 - HDMI - Wifi 802.11 ax - BT 5.2",
+            "category":"ordinateur portable",
+            "subCategory": "annilator_R2",
+            "variant": {
+                "noir":{
+                    "size": 111,
+                    "price": "50",
+                    "weight": 46,
+                    "name": "test_1",
+                    "image":{
+                        "fileName": "alineware",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1049676506005250079/asus_z13_i7_16.png"
+                    }
+                }
+            }
+        },
+        "PC portable ALIENWARE X14 R1 LUNAR LIGHT": {
+            "prix": 999.99,
+            "caracteristique":"Ecran 14\" FHD, rocesseur Intel® Core™ i7 12700H (14 coeurs, jusqu'à 4,7 GHz Turbo Max), RAM 16 Go DDR4 - 512 Go SSD, Windows 11 - Wifi 802.11 ax - BT 5.2",
+            "category":"ordinateur fixe",
+            "subCategory": "RDD2",
+            "variant": {
+                "noir":{
+                    "size": 111,
+                    "price": "50",
+                    "weight": 46,
+                    "name": "test_2",
+                    "image":{
+                        "fileName": "alineware",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1049676505703256074/alienware.png"
+                    }
+                }
+            }
+        },
+        "PC portable ACER NITRO 5 AN517-54-76AF": {
+            "prix": 1699.99,
+            "caracteristique":"Ecran 17,3\" Full HD 144 Hz, Processeur Intel Core™ i7-11800H (8 coeurs, 2,3 GHz / 4,6 GHz), RAM 16 Go DDR4 - 1 To SSD - carte graphique NVidia GeForce RTX 3070 8 Go GDDR6, Windows 11 - HDMI - Wifi 802.11 ax - BT 5.1",
+            "category":"ordinateur portable",
+            "subCategory": "RDD2",
+            "variant": {
+                "noir":{
+                    "size": 111,
+                    "price": "50",
+                    "weight": 46,
+                    "name": "test_3",
+                    "image":{
+                        "fileName": "acer nitro",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1049676506344980541/acer_an515_i5_16.png"
+                    }
+                }
+            }
+        }
+    }
+}

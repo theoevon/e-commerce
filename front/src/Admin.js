@@ -1,4 +1,4 @@
-import { Admin, Resource, EditGuesser } from "react-admin";
+import { Admin, Resource } from "react-admin";
 import jsonServerProvider from "ra-data-json-server";
 import { UserList } from "./users.js";
 import { PostList, PostEdit, PostCreate } from "./posts.js";

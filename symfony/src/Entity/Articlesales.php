@@ -13,11 +13,11 @@ class Articlesales
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $id_sale = null;
+    #[ORM\ManyToOne(inversedBy: 'articlesales')]
+    private ?Article $article = null;
 
-    #[ORM\Column]
-    private ?int $id_article = null;
+    #[ORM\ManyToOne(inversedBy: 'articlesales')]
+    private ?Sales $sales = null;
 
     public function getId(): ?int
     {
@@ -29,21 +29,26 @@ class Articlesales
         return $this->id_sale;
     }
 
-    public function setIdSale(int $id_sale): self
+    public function getArticle(): ?Article
     {
-        $this->id_sale = $id_sale;
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): self
+    {
+        $this->article = $article;
 
         return $this;
     }
 
-    public function getIdArticle(): ?int
+    public function getSales(): ?Sales
     {
-        return $this->id_article;
+        return $this->sales;
     }
 
-    public function setIdArticle(int $id_article): self
+    public function setSales(?Sales $sales): self
     {
-        $this->id_article = $id_article;
+        $this->sales = $sales;
 
         return $this;
     }

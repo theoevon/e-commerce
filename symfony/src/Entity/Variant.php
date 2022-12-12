@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VariantRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,9 +15,6 @@ class Variant
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column]
-    private ?int $id_article = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $color = null;
@@ -29,21 +28,23 @@ class Variant
     #[ORM\Column]
     private ?int $weight = null;
 
+    #[ORM\ManyToOne(inversedBy: 'variants')]
+    private ?Article $article = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $name = null;
+
+    #[ORM\OneToMany(mappedBy: 'variant', targetEntity: Image::class)]
+    private Collection $images;
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdArticle(): ?int
-    {
-        return $this->id_article;
-    }
-
-    public function setIdArticle(int $id_article): self
-    {
-        $this->id_article = $id_article;
-
-        return $this;
     }
 
     public function getColor(): ?string
@@ -90,6 +91,60 @@ class Variant
     public function setWeight(int $weight): self
     {
         $this->weight = $weight;
+
+        return $this;
+    }
+
+    public function getArticle(): ?Article
+    {
+        return $this->article;
+    }
+
+    public function setArticle(?Article $article): self
+    {
+        $this->article = $article;
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Image $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images->add($image);
+            $image->setVariant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Image $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getVariant() === $this) {
+                $image->setVariant(null);
+            }
+        }
 
         return $this;
     }

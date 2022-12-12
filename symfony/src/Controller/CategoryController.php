@@ -9,30 +9,42 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\CategoryRepository;
 
 class CategoryController extends AbstractController
 {
-    #[Route('/category', name: 'app_category')]
+    #[Route('/addCategory', name: 'app_category')]
     public function category(request $request, EntityManagerInterface $entityManager): Response
     {
-        $arr = [];
-
+        //request => name
         $category = new Category();
         $category->setName($request->toArray()['name']);
         $entityManager->persist($category);
         try {
             $entityManager->flush();
+        } catch (Exception $e) {
+            $arrStatus["status"] = "error";
+            $arrStatus["message"] = "Champs non remplis ou type de donnée non valide ";
+            return new Response(json_encode($arrStatus));
         }
-        catch(Exception $e) {
-            $arr["status"] = "error";
-            $arr["message"] = "Champs non remplis ou type de donnée non valide ";
-            $arr_json = json_encode($arr);
-            return new Response($arr_json);
+        $arrStatus["status"] = "success";
+        return new Response(json_encode($arrStatus));
+    }
+
+    #[Route('/showCategory/{id?}', name: 'app_category_api')]
+    function showCategory($id, CategoryRepository $category): Response
+    {
+        $arr_api = [];
+        if ($id != null) {
+            $valueCategory = $category->find($id);
+            $arr_api[$valueCategory->getId()] = $valueCategory->getName();
+        } else {
+            $data = $category->findAll();
+            foreach ($data as $valueCategory) {
+                $arr_api[$valueCategory->getId()] = $valueCategory->getName();
+            }
         }
-
-        $arr["status"] = "success";
-        $arr_json = json_encode($arr);
-
+        $arr_json = json_encode($arr_api);
         return new Response($arr_json);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Article>
@@ -37,6 +38,20 @@ class ArticleRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function fetchArticles()
+    {
+        $conn = $this->getEntityManager()
+            ->getConnection();
+
+        $sql = '
+            SELECT * FROM article
+            ';
+        $stmt = $conn->prepare($sql);
+        $result = $stmt->execute();
+
+        return $result->fetchAll();
     }
 
 //    /**

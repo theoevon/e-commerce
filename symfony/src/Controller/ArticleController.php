@@ -9,38 +9,139 @@ use App\Entity\Article;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\ArticleRepository;
+use App\Repository\CategoryRepository;
+use App\Repository\SubCategoryRepository;
+use App\Entity\Variant;
+use App\Entity\Image;
+use App\Repository\ImageRepository;
+use App\Repository\VariantRepository;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 
 class ArticleController extends AbstractController
 {
-    #[Route('/article', name: 'app_article')]
-    public function article(Request $request, EntityManagerInterface $entityManager): Response
+    // #[Route('/' , name: 'test')]
+    // public function articles(ManagerRegistry $doctrine, Request $request): Response
+    // {
+    //     $articles = $doctrine->getRepository(Article::class)->fetchArticles();
+
+    //     return new Response(json_encode($articles));
+    // }
+
+
+    #[Route('/addArticle/{file?}', name: 'app_article')]
+    public function article($file, Request $request, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository, SubCategoryRepository $subCategoryRepository): Response
+    {
+        //request => prix , description , category , name , subcategory , 
+        //variant => {color , size , price , weight , name , image => {filename , uuid}}
+
+        $articleEntity = new Article();
+        $variantEntity = new Variant();
+        $imageEntity = new Image();
+        if ($file == "file") {
+            $file = "./file.json";
+            $file = file_get_contents($file);
+            $data = json_decode($file);
+            foreach ($data as $category => $categoryValue) {
+                $this->articleCategory($category, $categoryValue, $articleEntity, $variantEntity, $imageEntity, $entityManager, $categoryRepository, $subCategoryRepository);               
+            }
+        }
+        $arr["status"] = "success";
+        return new Response(json_encode($arr));
+    }
+
+    public function articleCategory($category, $categoryValue, $articleEntity, $variantEntity, $imageEntity, $entityManager, $categoryRepository, $subCategoryRepository)
+    {
+        foreach ($categoryValue as $name => $value) {
+            $dataCategory = $categoryRepository->findOneBy(['name' => $category]);
+            $articleEntity->setCategory($dataCategory);
+            $dataSubCategory = $subCategoryRepository->findOneBy(['name' => $value->subCategory]);
+            $articleEntity->setSubCategory($dataSubCategory);
+            $articleEntity->setName($name);
+            $articleEntity->setPrix($value->prix);
+            $articleEntity->setDescription($value->caracteristique);
+            $articleEntity->setPublishDate(date("Y-m-d"));
+            $this->articleVariant($value->variant, $articleEntity, $variantEntity, $imageEntity, $entityManager, 'file');
+            $entityManager->clear(Article::class);  
+        }
+    }
+
+    public function articleVariant($valueVariant, $articleEntity, $variantEntity, $imageEntity, $entityManager, $req)
+    {
+        if ($req == "file") {
+            foreach ($valueVariant as $color => $value) {
+                $variantEntity->setColor($color);
+                $variantEntity->setSize($value->size);
+                $variantEntity->setPrice($value->price);
+                $variantEntity->setWeight($value->weight);
+                $variantEntity->setName($value->name);
+                $imageEntity->setCle($value->image->uuid);
+                $imageEntity->setFilename($value->image->fileName);
+                $variantEntity->addImage($imageEntity);
+                $articleEntity->addVariant($variantEntity);
+                $entityManager->persist($imageEntity);
+                $entityManager->persist($variantEntity);
+                $entityManager->persist($articleEntity);
+                $entityManager->flush();
+                $entityManager->clear(Variant::class);
+                $entityManager->clear(Image::class);
+            }
+        }
+        // else {
+        //     $variant->setColor($valueVariant['color']);
+        //     $variant->setSize($valueVariant['size']);
+        //     $variant->setPrice($valueVariant['price']);
+        //     $variant->setWeight($valueVariant['weight']);
+        //     $variant->setName($valueVariant['name']);
+        //     $image->setCle($valueVariant['image']['uuid']);
+        //     $image->setCle($valueVariant['image']['fileName']);
+        //     $variant->addImage($image);
+        // }
+    }
+
+
+    #[Route('/showArticle/{id?}', name: 'app_article_api')]
+    public function article_api($id, ArticleRepository $articles, ImageRepository $imageRepository, VariantRepository $variantRepository): Response
     {
         $arr = [];
-
-        $article = new Article();
-        $article->setName($request->toArray()['name']);
-        $article->setDescription($request->toArray()['description']);
-        $article->setPrix($request->toArray()['prix']);
-        $article->setStock($request->toArray()['stock']);
-        $article->setIdCategory($request->toArray()['id_categorie']);
-        $article->setIdSubcategory($request->toArray()['id_subCategory']);
-        $article->setPublishDate(date("Y-m-d"));
-        $article->setVariants($request->toArray()['variants']);
-
-        $entityManager->persist($article);
-        try {
-            $entityManager->flush();
-        } catch (Exception $e) {
-
-            $arr["status"] = "error";
-            $arr["message"] = "Champs non remplis ou type de donnée non valide ";
-            $arr_json = json_encode($arr);
-            return new Response($arr_json);
+        $arr_api = [];
+        if ($id != null) {
+            $valueArticle = $articles->find($id);
+            $arr['name'] = $valueArticle->getName();
+            $arr['description'] = $valueArticle->getDescription();
+            $arr['prix'] = $valueArticle->getPrix();
+            $arr['publish_date'] = $valueArticle->getPublishDate();
+            $arr['category'] = $valueArticle->getCategory()->getName();
+            $arr['subCategory'] = $valueArticle->getSubCategory()->getName();
+            $valueVariant = $variantRepository->findBy(['article' => $valueArticle->getId()]);
+            foreach($valueVariant as $value) {
+            $valueImage = $imageRepository->findOneBy(['variant' => $value->getId()]);
+            $arr_temporaire[$value->getColor()] = ['fileName' => $valueImage->getFilename(), 'url' => $valueImage->getUuid()];
+            $arr['variant'] = $arr_temporaire;
+            }
+            array_push($arr_api, $arr);
+        } else {
+            $data = $articles->findAll();
+            foreach ($data as $valueArticle) {
+                $arr = []; 
+                $arr['name'] = $valueArticle->getName();
+                $arr['description'] = $valueArticle->getDescription();
+                $arr['prix'] = $valueArticle->getPrix();
+                $arr['publish_date'] = $valueArticle->getPublishDate();
+                $arr['category'] = $valueArticle->getCategory()->getName();
+                $arr['subCategory'] = $valueArticle->getSubCategory()->getName();
+                $valueVariant = $variantRepository->findBy(['article' => $valueArticle->getId()]);
+                $arr_temporaire = [];
+                foreach($valueVariant as $value) {
+                    $valueImage = $imageRepository->findOneBy(['variant' => $value->getId()]);
+                    $arr_temporaire[$value->getColor()] = ['fileName' => $valueImage->getFilename(), 'url' => $valueImage->getUuid()];
+                    $arr['variant'] = $arr_temporaire;
+                }
+                array_push($arr_api, $arr);
+            }
         }
-
-        $arr["status"] = "success";
-        $arr_json = json_encode($arr);
-
-        return new Response($arr_json);
+        $response = new JsonResponse($arr_api);
+        return $response;
     }
 }

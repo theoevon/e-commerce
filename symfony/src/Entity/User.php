@@ -156,4 +156,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getIsAdmin(): ?string
+    {
+        return $this->is_admin;
+    }
+
+    public function getIsVerifed(): ?string
+    {
+        return $this->is_verifed;
+    }
 }

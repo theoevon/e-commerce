@@ -13,30 +13,18 @@ class Image
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $id_variant = null;
-
     #[ORM\Column(length: 255)]
     private ?string $uuid = null;
 
     #[ORM\Column(length: 255)]
     private ?string $filename = null;
 
+    #[ORM\ManyToOne(inversedBy: 'images')]
+    private ?Variant $variant = null;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdVariant(): ?int
-    {
-        return $this->id_variant;
-    }
-
-    public function setIdVariant(int $id_variant): self
-    {
-        $this->id_variant = $id_variant;
-
-        return $this;
     }
 
     public function getCle(): ?string
@@ -59,6 +47,30 @@ class Image
     public function setFilename(string $filename): self
     {
         $this->filename = $filename;
+
+        return $this;
+    }
+
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(string $uuid): self
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    public function getVariant(): ?Variant
+    {
+        return $this->variant;
+    }
+
+    public function setVariant(?Variant $variant): self
+    {
+        $this->variant = $variant;
 
         return $this;
     }

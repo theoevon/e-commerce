@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20221202154118 extends AbstractMigration
+final class Version20221208132006 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -20,12 +20,16 @@ final class Version20221202154118 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE article ADD id_category INT NOT NULL, ADD id_subcategory INT DEFAULT NULL, ADD publish_date VARCHAR(255) NOT NULL, ADD variants LONGTEXT NOT NULL');
+        $this->addSql('ALTER TABLE image ADD variant_id INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE image ADD CONSTRAINT FK_C53D045F3B69A9AF FOREIGN KEY (variant_id) REFERENCES variant (id)');
+        $this->addSql('CREATE INDEX IDX_C53D045F3B69A9AF ON image (variant_id)');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE article DROP id_category, DROP id_subcategory, DROP publish_date, DROP variants');
+        $this->addSql('ALTER TABLE image DROP FOREIGN KEY FK_C53D045F3B69A9AF');
+        $this->addSql('DROP INDEX IDX_C53D045F3B69A9AF ON image');
+        $this->addSql('ALTER TABLE image DROP variant_id');
     }
 }
