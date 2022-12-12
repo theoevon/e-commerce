@@ -1,4 +1,4 @@
-import React , {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from "axios";
 
 const Test = () => {
@@ -11,7 +11,6 @@ const Test = () => {
                 const response = await axios.get("http://localhost:8000/showArticle");
                 const data = Object.entries(response.data)
                 setArticles(data);
-                console.log(data);
             }
             catch (error) {
                 console.log(error);
@@ -21,12 +20,19 @@ const Test = () => {
         getArticleData();
     }, []);
 
-    return(
+    return (
         <div>
+            <p>coucou</p>
             {articles.map((article) => {
                 return <div>
-                <p>{article[1].name}</p>
-                <img src={article[1].image_url} alt="" />
+                    {Object.entries(article[1].variant).map((data) => {
+                        return <div>
+                            <img src={data[1].url} alt="" />
+                            <p>{data[0]}</p>
+                        </div>
+
+                    })}
+
                 </div>
             })}
         </div>

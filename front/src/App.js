@@ -1,17 +1,16 @@
 import './App.css';
 import { BrowserRouter as Router,Routes, Route } from 'react-router-dom';
 import Accueil from './accueil.js';
-import Ipad from './ipadAir.js';
+import Ipad from './component/ipadAir.js';
 import IpadGris from './ipadAirGris.js';
 import IpadRose from './ipadAirRose.js';
 import IpadBleu from './ipadAirBleu.js';
 import IpadMauve from './ipadAirMauve.js';
 import IpadLumiere from './ipadAirLumiere.js';
 import Connexion from './connexion.js';
-import Inscription from './inscription';
-import PcPortable from './pc_portable';
-// import User from './Admin.js';
-import Test from './test';
+import Inscription from './inscription.js';
+import User from './Admin.js';
+import PcPortable from './Pc_portable.js';
 
 function App(){
   return (
@@ -26,9 +25,8 @@ function App(){
         <Route exact path='/ipad/lumiere' element={< IpadLumiere />}></Route>
         <Route exact path='/connexion' element={<Connexion/>}></Route>
         <Route exact path='/inscription' element={<Inscription/>}></Route>
-        {/* <Route exact path='/admin/*' element={<User/>}></Route> */}
-        <Route exact path='/test' element={<Test />}></Route>
-        <Route exact path='/pc_portable' element={<PcPortable/>}></Route>
+        <Route exact path='/admin/*' element={<User/>}></Route>
+        <Route exact path='/PC_portable' element={<PcPortable/>}></Route>
       </Routes>
     </Router>
   );
