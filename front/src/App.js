@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router,Routes, Route } from 'react-router-dom';
 import Accueil from './accueil.js';
-import Ipad from './ipadAir.js';
+import Ipad from './component/ipadAir.js';
 import IpadGris from './ipadAirGris.js';
 import IpadRose from './ipadAirRose.js';
 import IpadBleu from './ipadAirBleu.js';

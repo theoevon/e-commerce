@@ -9,36 +9,34 @@ use App\Entity\Variant;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
+use App\Repository\ArticleRepository;
+use App\Entity\Article;
 
 class VariantController extends AbstractController
 {
-    #[Route('/variant', name: 'app_variant')]
-    public function variant(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/addVariant', name: 'app_variant')]
+    public function variant(Request $request, EntityManagerInterface $entityManager, ArticleRepository $articleRepository): Response
     {
-        $arr = [];
+        //request[/addVariant] => color , size , price , weight , name , article_name
 
         $variant = new Variant();
-        $variant->setIdArticle($request->toArray()['id_article']);
         $variant->setColor($request->toArray()['color']);
         $variant->setSize($request->toArray()['size']);
         $variant->setPrice($request->toArray()['price']);
-        $variant->setSize($request->toArray()['size']);
         $variant->setWeight($request->toArray()['weight']);
-
+        $variant->setName($request->toArray()['name']);
+        $valueArticle = $articleRepository->findOneBy(['name' => $request->toArray()['article_name']]);
+        $variant->setArticle($valueArticle);
         $entityManager->persist($variant);
         try {
             $entityManager->flush();
         } catch (Exception $e) {
-
-            $arr["status"] = "error";
-            $arr["message"] = "Champs non remplis ou type de donnée non valide ";
-            $arr_json = json_encode($arr);
-            return new Response($arr_json);
+            $arrStatus["status"] = "error";
+            $arrStatus["message"] = "Champs non remplis ou type de donnée non valide ";
+            return new Response(json_encode($arrStatus));
         }
 
         $arr["status"] = "success";
-        $arr_json = json_encode($arr);
-
-        return new Response($arr_json);
+        return new Response(json_encode($arr));
     }
 }

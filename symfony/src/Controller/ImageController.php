@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Image;
+use App\Repository\ImageRepository;
 
 class ImageController extends AbstractController
 {
@@ -18,7 +19,6 @@ class ImageController extends AbstractController
         $arr = [];
 
         $image = new Image();
-        $image->setIdVariant($request->toArray()['id_variant']);
         $image->setCle($request->toArray()['uuid']);
         $image->setFilename($request->toArray()['filename']);
 
@@ -38,4 +38,7 @@ class ImageController extends AbstractController
 
         return new Response($arr_json);
     }
+
+
+   
 }

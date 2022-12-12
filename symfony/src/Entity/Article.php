@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,6 +33,18 @@ class Article
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?SubCategory $subCategory = null;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Articlesales::class)]
+    private Collection $articlesales;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Variant::class)]
+    private Collection $variants;
+
+    public function __construct()
+    {
+        $this->articlesales = new ArrayCollection();
+        $this->variants = new ArrayCollection();
+    }
  
     public function getId(): ?int
     {
@@ -105,6 +119,66 @@ class Article
     public function setSubCategory(?SubCategory $subCategory): self
     {
         $this->subCategory = $subCategory;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Articlesales>
+     */
+    public function getArticlesales(): Collection
+    {
+        return $this->articlesales;
+    }
+
+    public function addArticlesale(Articlesales $articlesale): self
+    {
+        if (!$this->articlesales->contains($articlesale)) {
+            $this->articlesales->add($articlesale);
+            $articlesale->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArticlesale(Articlesales $articlesale): self
+    {
+        if ($this->articlesales->removeElement($articlesale)) {
+            // set the owning side to null (unless already changed)
+            if ($articlesale->getArticle() === $this) {
+                $articlesale->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Variant>
+     */
+    public function getVariants(): Collection
+    {
+        return $this->variants;
+    }
+
+    public function addVariant(Variant $variant): self
+    {
+        if (!$this->variants->contains($variant)) {
+            $this->variants->add($variant);
+            $variant->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVariant(Variant $variant): self
+    {
+        if ($this->variants->removeElement($variant)) {
+            // set the owning side to null (unless already changed)
+            if ($variant->getArticle() === $this) {
+                $variant->setArticle(null);
+            }
+        }
 
         return $this;
     }
