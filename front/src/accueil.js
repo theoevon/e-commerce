@@ -23,15 +23,17 @@ const Accueil  = () =>{
                   </div>
                 </div>
                 <div className="article">
-                  <div className="row_article">
-                    <div className="text">
-                      <h2>PC PORTABLE</h2>
-                      <p>DÉCOUVRIR &gt;</p>
+                  <a href="pc_portable">
+                    <div className="row_article">
+                      <div className="text">
+                        <h2>PC PORTABLE</h2>
+                        <p>DÉCOUVRIR &gt;</p>
+                      </div>
+                      <div className="img_article">
+                        <img src="https://cdn.discordapp.com/attachments/973872783320817744/1047455732829798460/b5c927b0f77a27b81fd38b65df5f2fbf_XL-removebg-preview.png" alt="img_article"></img>
+                      </div>
                     </div>
-                    <div className="img_article">
-                      <img src="https://cdn.discordapp.com/attachments/973872783320817744/1047455732829798460/b5c927b0f77a27b81fd38b65df5f2fbf_XL-removebg-preview.png" alt="img_article"></img>
-                    </div>
-                  </div>
+                  </a>
                 </div>
                 <div className="article">
                   <div className="row_article">

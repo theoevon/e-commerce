@@ -9,6 +9,7 @@ import IpadMauve from './ipadAirMauve.js';
 import IpadLumiere from './ipadAirLumiere.js';
 import Connexion from './connexion.js';
 import Inscription from './inscription';
+import PcPortable from './pc_portable';
 // import User from './Admin.js';
 import Test from './test';
 
@@ -27,6 +28,7 @@ function App(){
         <Route exact path='/inscription' element={<Inscription/>}></Route>
         {/* <Route exact path='/admin/*' element={<User/>}></Route> */}
         <Route exact path='/test' element={<Test />}></Route>
+        <Route exact path='/pc_portable' element={<PcPortable/>}></Route>
       </Routes>
     </Router>
   );
