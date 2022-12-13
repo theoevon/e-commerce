@@ -2,7 +2,6 @@ import Cookies from 'universal-cookie';
 
 const Header = () => {
         let cookies = new Cookies();
-        console.log(cookies.get("user_name"));
     return (
         <header>
             <div className="container">
@@ -24,7 +23,7 @@ const Header = () => {
                                 <p className="info_icon">Panier</p>
                             </div>
                         </a>
-                    {cookies.get('user_name') != 'undefind' ? (<p>{cookies.get("user_name")}</p>) : null}
+                    {cookies.get('user_name') !== 'undefind' ? (<p>{cookies.get("user_name")}</p>) : null}
                     </div>
                 </div>
             </div>

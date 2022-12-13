@@ -11,13 +11,12 @@ import Connexion from './connexion.js';
 import Inscription from './inscription';
 // import User from './Admin.js';
 import Test from './test';
-
 function App(){
   return (
     <Router>
       <Routes>
         <Route exact path='/' element={< Accueil />}></Route>
-        <Route exact path='/ipad' element={< Ipad />}></Route>
+        <Route path='/article/tablette/:name' element={< Ipad />}></Route>
         <Route exact path='/ipad/gris' element={< IpadGris />}></Route>
         <Route exact path='/ipad/rose' element={< IpadRose />}></Route>
         <Route exact path='/ipad/bleu' element={< IpadBleu />}></Route>
