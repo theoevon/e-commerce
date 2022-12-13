@@ -39,7 +39,7 @@ const Tablette = () => {
                         <div className="all_article">
                             {articles.map((article) => {
                                 if (article[1].category === 'tablette') {
-                                    let url = "/article/" + article[1].category + "/" + article[1].name
+                                    let url = article[1].category + "/" + article[1].name
                                     return <a href={url}>
                                         <div className="article">
                                             <div className="row_article">
