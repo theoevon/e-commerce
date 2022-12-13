@@ -8,7 +8,7 @@ const Test = () => {
 
         async function getArticleData() {
             try {
-                const response = await axios.get("https://localhost:8000/showArticle");
+                const response = await axios.get("http://localhost:8000/showArticle");
                 const data = Object.entries(response.data)
                 setArticles(data);
             }

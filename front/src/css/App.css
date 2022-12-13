@@ -183,7 +183,7 @@ a{
 .titre_ipad h2{
   margin: 0;
 }
-.rond_gris, .rond_bleu, .rond_rose, .rond_mauve, .rond_lumiere{
+.rond_gris, .rond_bleu, .rond_rose, .rond_violet, .rond_lumiere_stellaire{
   min-width: 32px;
   max-width: 32px;
   min-height: 32px;
@@ -203,10 +203,10 @@ a{
 .rond_rose{
   background-color: #E7D2CF;
 }
-.rond_mauve{
+.rond_violet{
   background-color: #BFBDD3;
 }
-.rond_lumiere{
+.rond_lumiere_stellaire{
   background-color: #FAF7F2;
 }
 footer hr{
@@ -235,4 +235,14 @@ footer hr{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.liste{
+  display: flex;
+  left: auto;
+  right: auto;
+  margin-top: 2rem;
+}
+.info_liste{
+  color: white;
+  padding-top: 1rem;
 }

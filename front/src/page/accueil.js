@@ -1,12 +1,13 @@
-import './App.css';
-import Header from './header.js';
-import Footer from './footer.js';
+import '../css/App.css';
+import Header from '../component/header.js';
+import Footer from '../component/footer.js';
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
 
 const Accueil = () => {
 
   const [articles, setArticles] = useState([]);
+  const [category , setCategory] = useState(null);
 
   useEffect(() => {
 
@@ -24,6 +25,10 @@ const Accueil = () => {
 
     getArticleData();
   }, []);
+
+  const test  = () => {
+    alert("coucou");
+  }
 
   return (
     <div className='app'>

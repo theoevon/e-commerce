@@ -1,4 +1,5 @@
 import Cookies from 'universal-cookie';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
         let cookies = new Cookies();
@@ -28,7 +29,14 @@ const Header = () => {
                 </div>
             </div>
             <div className="navbar">
-                <nav></nav>
+                <nav>
+                    <div className='liste'>
+                        <Link to={{pathname: "/Pc_portable"}} className='info_liste'>Pc portable</Link>
+                        <Link to={{pathname: "/Ordinateur"}} className='info_liste'>Ordinateur </Link>
+                        <Link to={{pathname: "/Composant"}} className='info_liste'>Composant</Link>
+                        <Link to={{pathname: "/Tablette" ,  state: { fromDashboard: true }}} className='info_liste'>Tablette</Link>
+                    </div>
+                </nav>
             </div>
         </header>
     )

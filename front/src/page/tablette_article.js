@@ -1,4 +1,4 @@
-import Header from '../header.js';
+import Header from '../component/header.js';
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import { useParams } from 'react-router-dom'
@@ -63,9 +63,10 @@ const Ipad = () => {
                     {articles.map((article) => {
                         if (article[1].name === name) {
                             return Object.entries(article[1].variant).map((variant) => {
+                                let colore = "rond_" + variant[0]
                                 return <div className='div_couleur'>
                                     <div className='couleur' onClick={() => setColor(variant[0])}>
-                                        <div className='rond_gris'></div>
+                                        <div className={colore}></div>
                                         <h3>{variant[0]}</h3>
                                     </div>
                                 </div>

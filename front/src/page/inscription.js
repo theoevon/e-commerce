@@ -1,32 +1,26 @@
-import './log.css';
-import React, { useState } from 'react';
+import '../css/log.css';
 import axios from "axios";
-import Cookies from 'universal-cookie';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 
-const Connexion = () => {
-    const navigation = useNavigate();
+
+const Inscription = () => {
+
+    const [pseudo, setPseudo] = useState(null)
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
 
     const sendData = async (e) => {
         e.preventDefault();
 
-        await axios.post("https://localhost:8000/login", {
+        axios.post("http://localhost:8000/register", {
+            pseudo: pseudo,
             email: email,
             password: password
         })
             .then((response) => {
                 if (response.data.status === "success") {
-                    let cookies = new Cookies();
-                    cookies.set('user_name', response.data.name , {
-                    sameSite: "none",
-                    secure: true})
-                    navigation('/');
+                    alert(response.data.status)
                 }
-            })
-            .catch((error) => {
-                alert("utilisateur non reconnue")
             })
     }
 
@@ -47,18 +41,18 @@ const Connexion = () => {
             <div className='body'>
                 <div className="container_form">
                     <div className="connexion">
-                        <h2>VOUS AVEZ DÉJÀ UN COMPTE ?</h2>
+                        <h2>VOS IDENTIFIANTS</h2>
                         <form onSubmit={(e) => sendData(e)} action="" method="post">
+                            <input onChange={(e) => setPseudo(e.target.value)} type="text" name="identifiant" id="identifiant" placeholder="VOTRE IDENTIFIANT" required></input>
                             <input onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" placeholder="VOTRE EMAIL" required></input>
                             <input onChange={(e) => setPassword(e.target.value)} type="password" name="password" id="password" placeholder="VOTRE MOT DE PASSE" required></input>
-                            <p>VOUS AVEZ OUBLIÉ VOTRE MOT DE PASSE ?</p>
-                            <input type="submit" id="submit" className="btn" value="CONNEXION"></input>
+                            <input type="submit" id="submit" className="btn" value="CRÉEZ UN COMPTE"></input>
                         </form>
                     </div>
                     <hr></hr>
                     <div className="inscription">
-                        <h2>VOUS-ÊTES NOUVEAU ?</h2>
-                        <a href="/inscription"><div className="btn">CRÉEZ UN COMPTE</div></a>
+                        <h2>VOUS-AVEZ DÉJÀ UN COMPTE ?</h2>
+                        <a href="/connexion"><div className="btn">CONNEXION</div></a>
                     </div>
                 </div>
             </div>
@@ -66,4 +60,4 @@ const Connexion = () => {
     )
 }
 
-export default Connexion;
+export default Inscription;
