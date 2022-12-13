@@ -236,3 +236,13 @@ footer hr{
   align-items: center;
   justify-content: center;
 }
+.liste{
+  display: flex;
+  left: auto;
+  right: auto;
+  margin-top: 2rem;
+}
+.info_liste{
+  color: white;
+  padding-top: 1rem;
+}

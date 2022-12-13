@@ -1,5 +1,4 @@
-import Dropdown from 'react-bootstrap/Dropdown';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 const Header = () => {
     return (
@@ -28,17 +27,13 @@ const Header = () => {
             </div>
             <div className="navbar">
                 <nav>
-                <Dropdown>
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-        Dropdown Button
-      </Dropdown.Toggle>
-
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-        <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-        <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>                </nav>
+                    <div className='liste'>
+                        <a className='info_liste' href='pc_portable'>Pc portable </a>
+                        <a className='info_liste' href=''>Ordinateur </a>
+                        <a className='info_liste' href=''>Carte grapique</a>
+                        <a className='info_liste' href='ipad'>Ipad</a>
+                    </div>
+                </nav>
             </div>
         </header>
     )
