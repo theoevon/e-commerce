@@ -1,22 +1,28 @@
 import './log.css';
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import axios from "axios";
+import Cookies from 'universal-cookie';
+import { useNavigate } from 'react-router-dom';
 
 const Connexion = () => {
-
+    const navigation = useNavigate();
     const [email, setEmail] = useState(null)
     const [password, setPassword] = useState(null)
 
     const sendData = async (e) => {
         e.preventDefault();
 
-        axios.post("https://localhost:8000/login", {
+        await axios.post("https://localhost:8000/login", {
             email: email,
             password: password
         })
             .then((response) => {
                 if (response.data.status === "success") {
-                    alert(response.data.status)
+                    let cookies = new Cookies();
+                    cookies.set('user_name', response.data.name , {
+                    sameSite: "none",
+                    secure: true})
+                    navigation('/');
                 }
             })
             .catch((error) => {

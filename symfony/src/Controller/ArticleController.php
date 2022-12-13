@@ -141,7 +141,8 @@ class ArticleController extends AbstractController
                 array_push($arr_api, $arr);
             }
         }
-        $response = new JsonResponse($arr_api);
+        $response = new Response(json_encode($arr_api, JSON_PRETTY_PRINT));
+        $response->headers->set('Content-Type', 'application/json');
         return $response;
     }
 }

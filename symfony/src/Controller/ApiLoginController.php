@@ -19,9 +19,13 @@ class ApiLoginController extends AbstractController
                 'message' => 'Utilisateur inconue',
             ]);
         }
-        
+        session_start();
+        $_SESSION['user_email'] = $user->getEmail(); 
+        $_SESSION['user_pseudo'] = $user->getPseudo(); 
         return $this->json([
             'status'  => 'success' ,
+            'name' => $user->getPseudo(),
+            'email' => $user->getEmail()
         ]);
     }
 }
