@@ -11,13 +11,11 @@ use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ApiResource]
-#[GetCollection(normalizationContext: ['groups' => 'article:get'])]
 class Article
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups("article:get")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -35,14 +33,14 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles')]
     private ?Category $category = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
-    private ?SubCategory $subCategory = null;
-
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Articlesales::class)]
     private Collection $articlesales;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Variant::class)]
     private Collection $variants;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?SubCategory $subCategory = null;
 
     public function __construct()
     {
@@ -115,18 +113,6 @@ class Article
         return $this;
     }
 
-    public function getSubCategory(): ?SubCategory
-    {
-        return $this->subCategory;
-    }
-
-    public function setSubCategory(?SubCategory $subCategory): self
-    {
-        $this->subCategory = $subCategory;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Articlesales>
      */
@@ -186,5 +172,16 @@ class Article
 
         return $this;
     }
-    
+
+    public function getSubCategory(): ?SubCategory
+    {
+        return $this->subCategory;
+    }
+
+    public function setSubCategory(?SubCategory $subCategory): self
+    {
+        $this->subCategory = $subCategory;
+
+        return $this;
+    } 
 }

@@ -130,8 +130,7 @@ class ArticleController extends AbstractController
                 $arr['prix'] = $valueArticle->getPrix();
                 $arr['publish_date'] = $valueArticle->getPublishDate();
                 $arr['category'] = $valueArticle->getCategory()->getName();
-                dd($valueArticle);
-                // $arr['subCategory'] = $valueArticle->getSubCategory()->getName();
+                $arr['subCategory'] = $valueArticle->getSubCategory()->getName();
                 $valueVariant = $variantRepository->findBy(['article' => $valueArticle->getId()]);
                 $arr_temporaire = [];
                 foreach($valueVariant as $value) {
