@@ -36,18 +36,6 @@ class Articlesales
         return $this;
     }
 
-    public function getSales(): ?Sales
-    {
-        return $this->sales;
-    }
-
-    public function setSales(?Sales $sales): self
-    {
-        $this->sales = $sales;
-
-        return $this;
-    }
-
     public function getPromotion(): ?int
     {
         return $this->promotion;
