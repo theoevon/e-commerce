@@ -36,22 +36,30 @@ const Ordinateur_portable = () => {
               {articles.map((article) => {
                 if (article[1].category === 'ordinateur portable') {
                   let url = article[1].category + "/" + article[1].name
-                  return <a href={url}>
-                    <div className="article">
-                      <div className="row_article">
-                        <div className="text">
-                          <h2>{article[1].name}</h2>
+                  return <div className="article">
+                    <div className="row_article">
+                      <div >
+                        <h2>{article[1].name}</h2>
+                        <a href={url}>
                           <p>DÉCOUVRIR &gt;</p>
-                          <span>
-                            {article[1].description}
-                          </span>
-                        </div>
-                        <div className="img_article">
-                          <img src={Object.entries(article[1].variant)[0][1].url} alt="img_article"></img>
+                        </a>
+                        <div className="article_container">
+                          <div className="img_article ">
+                            <img src={Object.entries(article[1].variant)[0][1].url} alt="img_article"></img>
+                          </div>
+                          <div className='article_description'>
+                            <span>
+                              {article[1].description}
+                            </span>
+                          </div>
+                          <div className='article_info'>
+                            <p>{article[1].prix}$</p>
+                            <button className='btn_ajouter_panier'>Ajouter au panier</button>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </a>
+                  </div>
                 }
               })
               }

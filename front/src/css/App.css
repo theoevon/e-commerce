@@ -106,7 +106,6 @@ footer .text h4{
   border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 1rem;
   margin: 1%;
-  cursor: pointer;
 }
 .article:hover ~ p{
   border-bottom: 1px solid #3B83EF;
@@ -245,4 +244,29 @@ footer hr{
 .info_liste{
   color: white;
   padding-top: 1rem;
+}
+
+.article {
+  text-align: center;
+}
+
+.article_description {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  margin-right: 12%;
+}
+
+.article_container {
+  display: flex;
+  justify-content: center;
+}
+
+.row_article .article_info button {
+  margin-top: 100%;
+  background-color: #001e69;
+  color: aliceblue;
+  width: 10vw;
+  /* padding: 2% 0% 2% 0%;
+  border-radius: 10px; */
 }
