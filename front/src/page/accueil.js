@@ -39,7 +39,7 @@ const Accueil = () => {
             <h1>NOS PRODUITS</h1>
             <div className="all_article">
               {articles.map((article) => {
-                let url = "/article/" + article[1].category + "/" + article[1].name
+                let url = article[1].category + "/" + article[1].name
                 return <a href={url}>
                   <div className="article">
                     <div className="row_article">
