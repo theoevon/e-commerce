@@ -30,7 +30,7 @@ const Tablette = () => {
     }
 
     return (
-        <div className='app'>
+        <div className='tablette'>
             <Header />
             <div className='body_article'>
                 <div className="container">
@@ -40,22 +40,23 @@ const Tablette = () => {
                             {articles.map((article) => {
                                 if (article[1].category === 'tablette') {
                                     let url = article[1].category + "/" + article[1].name
-                                    return <a href={url}>
-                                        <div className="article">
-                                            <div className="row_article">
-                                                <div className="text">
-                                                    <h2>{article[1].name}</h2>
+                                    return <div className="article">
+                                        <div className="row_article">
+                                            <div className="text">
+                                                <h2>{article[1].name}</h2>
+                                                <a href={url}>
                                                     <p>DÉCOUVRIR &gt;</p>
-                                                    <span>
-                                                        {article[1].description}
-                                                    </span>
-                                                </div>
-                                                <div className="img_article">
-                                                    <img src={Object.entries(article[1].variant)[0][1].url} alt="img_article"></img>
-                                                </div>
+                                                </a>
+                                                <span>
+                                                    {article[1].description}
+                                                </span>
+                                                <button className='btn_ajouter_panier'>Ajouter au panier</button>
+                                            </div>
+                                            <div className="img_article">
+                                                <img src={Object.entries(article[1].variant)[0][1].url} alt="img_article"></img>
                                             </div>
                                         </div>
-                                    </a>
+                                    </div>
                                 }
                             })
                             }

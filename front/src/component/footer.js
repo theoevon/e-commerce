@@ -32,11 +32,6 @@ const Footer = () => {
                     </div>
                 </div>
                 <hr></hr>
-                <div className="logo">
-                    <img src="https://cdn.discordapp.com/attachments/973872783320817744/1047108942397976636/image-removebg-preview.png" id="logo" alt="logo"></img>
-                    <p>France</p>
-                </div>
-                <hr></hr>
                 <div className="row_footer copyright">
                     <h3>© ogy 2022. Tous droits réservés</h3>
                     <img src="https://cdn.discordapp.com/attachments/973872783320817744/1048265470379298836/telechargement-removebg-preview_2.png" alt="icon footer" id="cadenas"></img>
