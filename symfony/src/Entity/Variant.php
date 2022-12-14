@@ -7,8 +7,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: VariantRepository::class)]
+#[ApiResource]
 class Variant
 {
     #[ORM\Id]
@@ -32,6 +34,7 @@ class Variant
     private ?Article $article = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups("article:get")]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'variant', targetEntity: Image::class)]
