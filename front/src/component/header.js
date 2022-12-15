@@ -42,7 +42,7 @@ const Header = () => {
             <div className="navbar">
                 <nav>
                     <div className='liste'>
-                        <Link to={{ pathname: "/Ordinateur_portable" }} className='info_liste'>Ordinateur portable</Link>
+                        <Link to={{ pathname: "/Ordinateur portable" }} className='info_liste'>Ordinateur portable</Link>
                         <Link to={{ pathname: "/Ordinateur" }} className='info_liste'>Ordinateur </Link>
                         <Link to={{ pathname: "/Composant" }} className='info_liste'>Composant</Link>
                         <Link to={{ pathname: "/Tablette", state: { fromDashboard: true } }} className='info_liste'>Tablette</Link>

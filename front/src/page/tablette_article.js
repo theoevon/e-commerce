@@ -1,4 +1,5 @@
 import Header from '../component/header.js';
+import Footer from '../component/footer.js';
 import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import { useParams } from 'react-router-dom'
@@ -23,7 +24,6 @@ const Ipad = () => {
                 console.log(error);
             }
         }
-
         getArticleData();
     }, []);
 
@@ -39,9 +39,8 @@ const Ipad = () => {
                         </div>
                     }
                 })}
-
             </div>
-            <div className='body_ipad'>
+            <div className='flex'>
                 <div className='left'>
                     {articles.map((article) => {
                         if (article[1].name === name) {
@@ -75,6 +74,7 @@ const Ipad = () => {
                     })}
                 </div>
             </div>
+            <Footer />
         </div>
     );
 }
