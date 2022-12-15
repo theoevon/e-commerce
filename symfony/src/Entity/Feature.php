@@ -3,50 +3,61 @@
 namespace App\Entity;
 
 use App\Repository\FeatureRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: FeatureRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    normalizationContext: ['groups' => ['article:output']],
+    denormalizationContext: ['groups' => ['article:input']],
+)]
 class Feature
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['article:output', 'article:input'])]
     private ?int $id = null;
-
-    #[ORM\Column]
-    private ?int $id_variant = null;
-
+    
     #[ORM\Column(length: 50)]
+    #[Groups(['article:output', 'article:input'])]
     private ?string $name = null;
-
+    
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['article:output', 'article:input'])]
     private ?string $value = null;
     
     #[ORM\Column(length: 255)]
+    #[Groups(['article:output', 'article:input'])]
     private ?string $type = null;
     
     #[ORM\Column]
+    #[Groups(['article:output', 'article:input'])]
     private ?bool $is_sortable = null;
+    
+    #[ORM\ManyToOne(inversedBy: 'feature')]
+    private ?Variant $variant = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdVariant(): ?int
-    {
-        return $this->id_variant;
-    }
+    // public function getVariant(): ?int
+    // {
+    //     return $this->variant;
+    // }
 
-    public function setIdVariant(int $id_variant): self
-    {
-        $this->id_variant = $id_variant;
+    // public function setVariant(int $variant): self
+    // {
+    //     $this->variant = $variant;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getName(): ?string
     {
@@ -95,4 +106,16 @@ class Feature
 
         return $this;
     }
+
+    // public function getVariant(): ?Variant
+    // {
+    //     return $this->variant;
+    // }
+
+    // public function setVariant(?Variant $variant): self
+    // {
+    //     $this->variant = $variant;
+
+    //     return $this;
+    // }
 }
