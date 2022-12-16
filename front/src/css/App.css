@@ -87,7 +87,6 @@ footer .text h4{
 }
 .body_article{
   background-color: #eeeeee;
-  display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -100,9 +99,11 @@ footer .text h4{
 .all_article{
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
 }
 .article{
-  min-width: 45%;
+  width: 35%;
+  min-width: 35%;
   border: 1px solid rgba(0, 0, 0, 0.15);
   padding: 1rem;
   margin: 1%;
@@ -248,6 +249,7 @@ footer hr{
 
 .article {
   text-align: center;
+  width: 50vw;
 }
 
 .article_description {
@@ -262,11 +264,65 @@ footer hr{
   justify-content: center;
 }
 
-.row_article .article_info button {
+.tablette button {
+  margin-top: 5%;
+}
+
+.ordinateur_portable .article button {
   margin-top: 100%;
+}
+
+.btn_ajouter_panier {
   background-color: #001e69;
   color: aliceblue;
   width: 10vw;
-  /* padding: 2% 0% 2% 0%;
-  border-radius: 10px; */
+  padding: 2% 0% 2% 0%;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.filtre {
+  width: 60vw;
+  height: 70vh;
+  background-color: #d5d3d8;
+}
+
+.ordinateur_portable .container {
+  display: flex;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.flex {
+  display: flex;
+}
+
+.center {
+  justify-content: center;
+}
+
+.items-center {
+  align-items: center;
+}
+ .filtre p {
+  margin-bottom: 0%;
+ }
+
+.container_filtre {
+  margin-left: 5%;
+}
+
+.filtre input {
+  border: none;
+  background-color: #b3b2b6;
+  padding: 2% 0% 2% 0%;
+  border-radius: 5px;
+}
+
+.cl-blue {
+  color: #3B83EF;
+}
+
+.font-size-2 {
+  font-size: 2vw;
 }
