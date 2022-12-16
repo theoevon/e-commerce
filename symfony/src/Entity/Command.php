@@ -5,31 +5,44 @@ namespace App\Entity;
 use App\Repository\CommandRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CommandRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['command:output']],
+    denormalizationContext: ['groups' => ['command:input']],
+)]
 class Command
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['command:output', 'command:input'])]
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Groups(['command:output', 'command:input'])]
     private ?int $id_user = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['command:output', 'command:input'])]
     private ?string $date = null;
 
     #[ORM\Column]
+    #[Groups(['command:output', 'command:input'])]
     private ?int $price = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['command:output', 'command:input'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['command:output', 'command:input'])]
     private ?string $token = null;
 
     #[ORM\Column]
+    #[Groups(['command:output', 'command:input'])]
     private ?bool $isgift = null;
 
     public function getId(): ?int
