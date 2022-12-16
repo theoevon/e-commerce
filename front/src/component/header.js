@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 
 const Header = () => {
     let cookies = new Cookies();
-    const [url_connexion, setUrl_connexion] = useState('/connexion');
-
     return (
         <header>
             <div className="container">
@@ -15,8 +13,7 @@ const Header = () => {
                     </a>
                     <input type="text" placeholder="Recherche..." name="search" id="search"></input>
                     <div className="profil row">
-                        {cookies.get('user_name') !== 'undefind' ?
-                            (<a href='/'>
+                        {cookies.get('user_name') !== 'undefind' ? (<a href='/'>
                                 <div className="account">
                                     <img src="https://cdn-icons-png.flaticon.com/512/5989/5989226.png" id="icon_account" alt="icon_account"></img>
                                     <p className="info_icon">Mon compte</p>
@@ -42,10 +39,10 @@ const Header = () => {
             <div className="navbar">
                 <nav>
                     <div className='liste'>
-                        <Link to={{ pathname: "/Ordinateur portable" }} className='info_liste'>Ordinateur portable</Link>
-                        <Link to={{ pathname: "/Ordinateur" }} className='info_liste'>Ordinateur </Link>
-                        <Link to={{ pathname: "/Composant" }} className='info_liste'>Composant</Link>
-                        <Link to={{ pathname: "/Tablette", state: { fromDashboard: true } }} className='info_liste'>Tablette</Link>
+                        <Link to={{ pathname: "/article/ordinateur portable" }} className='info_liste'>Ordinateur portable</Link>
+                        <Link to={{ pathname: "/article/ordinateur fixe" }} className='info_liste'>Ordinateur </Link>
+                        <Link to={{ pathname: "/article/composant" }} className='info_liste'>Composant</Link>
+                        <Link to={{ pathname: "/article/tablette", state: { fromDashboard: true } }} className='info_liste'>Tablette</Link>
                     </div>
                 </nav>
             </div>

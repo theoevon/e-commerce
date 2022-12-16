@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import { useParams } from 'react-router-dom'
 
-const Ipad = () => {
+const Tablette = () => {
 
     let { category } = useParams();
     let { name } = useParams();
@@ -44,13 +44,22 @@ const Ipad = () => {
                 <div className='left'>
                     {articles.map((article) => {
                         if (article[1].name === name) {
-                            return Object.entries(article[1].variant).map((variant) => {
-                                if (variant[0] === color) {
-                                    return <div>
-                                        <img src={variant[1].url} alt="image_ipad" />
-                                    </div>
-                                }
-                            })
+                            if (Object.entries(article[1].variant).length == 1) {
+                                return Object.entries(article[1].variant).map((variant) => {
+                                        return <div>
+                                            <img src={variant[1].url} alt="image_ipad" />
+                                        </div>
+                                })
+                            }
+                            else {
+                                return Object.entries(article[1].variant).map((variant) => {
+                                    if (variant[0] === color) {
+                                        return <div>
+                                            <img src={variant[1].url} alt="image_ipad" />
+                                        </div>
+                                    }
+                                })
+                            }
                         }
                     })}
                 </div>
@@ -79,4 +88,4 @@ const Ipad = () => {
     );
 }
 
-export default Ipad;
+export default Tablette;
