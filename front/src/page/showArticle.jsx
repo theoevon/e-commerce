@@ -6,22 +6,20 @@ import { useEffect, useState } from 'react';
 const ShowArticle = () => {
     let { category } = useParams();
 
-    const [component , setComponent] = useState(null);
+    const [component, setComponent] = useState(null);
 
     useEffect(() => {
-        if(category === 'tablette') {
+        if (category === 'tablette') {
             setComponent(<Tablette_article />)
         }
-        else if(category === 'composant') {
-    
+        else if (category === 'composant') {
         }
         else {
             setComponent(<Ordinateur_portable_article />)
         }
     }, [])
-    
 
-    return(
+    return (
         <div>
             {component}
         </div>

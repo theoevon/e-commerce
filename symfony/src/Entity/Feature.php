@@ -22,23 +22,23 @@ class Feature
     #[ORM\Column]
     #[Groups(['article:output', 'article:input'])]
     private ?int $id = null;
-    
+
     #[ORM\Column(length: 50)]
     #[Groups(['article:output', 'article:input'])]
     private ?string $name = null;
-    
+
     #[ORM\Column(type: Types::TEXT)]
     #[Groups(['article:output', 'article:input'])]
     private ?string $value = null;
-    
+
     #[ORM\Column(length: 255)]
     #[Groups(['article:output', 'article:input'])]
     private ?string $type = null;
-    
+
     #[ORM\Column]
     #[Groups(['article:output', 'article:input'])]
     private ?bool $is_sortable = null;
-    
+
     #[ORM\ManyToOne(inversedBy: 'feature')]
     private ?Variant $variant = null;
 
@@ -47,17 +47,10 @@ class Feature
         return $this->id;
     }
 
-    // public function getVariant(): ?int
-    // {
-    //     return $this->variant;
-    // }
-
-    // public function setVariant(int $variant): self
-    // {
-    //     $this->variant = $variant;
-
-    //     return $this;
-    // }
+    public function getVariant(): ?Variant
+    {
+        return $this->variant;
+    }
 
     public function getName(): ?string
     {
@@ -82,7 +75,7 @@ class Feature
 
         return $this;
     }
-    
+
     public function setIsSortable(bool $is_sortable): self
     {
         $this->is_sortable = $is_sortable;
@@ -107,15 +100,10 @@ class Feature
         return $this;
     }
 
-    // public function getVariant(): ?Variant
-    // {
-    //     return $this->variant;
-    // }
+    public function setVariant(?Variant $variant): self
+    {
+        $this->variant = $variant;
 
-    // public function setVariant(?Variant $variant): self
-    // {
-    //     $this->variant = $variant;
-
-    //     return $this;
-    // }
+        return $this;
+    }
 }

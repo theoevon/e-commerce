@@ -11,22 +11,27 @@ const Ordinateur = () => {
 
     let { category } = useParams();
     console.log("category_url = " + category);
+   
     useEffect(() => {
-
         async function getArticleData() {
-            try {
-                const response = await axios.get("https://localhost:8000/showArticle");
-                const data = Object.entries(response.data)
-
-                setArticles(data);
-            }
-            catch (error) {
-                console.log(error);
-            }
+          try {
+            const options = {
+              url: 'https://localhost:8000/api/articles',
+              method: 'GET',
+              headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json;charset=UTF-8'
+              }
+          }
+            const response = await axios(options);
+            setArticles(response.data);
+          }
+          catch (error) {
+            console.log(error);
+          }
         }
-
         getArticleData();
-    }, []);
+      }, []);
 
     return (
         <div className='ordinateur_portable'>
@@ -72,27 +77,26 @@ const Ordinateur = () => {
                 </div>
                 <div className='all_article'>
                     {articles.map((article) => {
-                        console.log("category_back = " + article[1].category);
 
-                        if (article[1].category === category) {
-                            let url = article[1].category + "/" + article[1].name
+                        if (article.category.name === category) {
+                            let url = "/article/" + article.category.name + "/" + article.name
                             return <div className="article">
                                 <div>
-                                    <h2>{article[1].name}</h2>
+                                    <h2>{article.name}</h2>
                                     <a href={url}>
                                         <p className='cl-blue'>DÉCOUVRIR &gt;</p>
                                     </a>
                                     <div className="article_container">
                                         <div className="img_article ">
-                                            <img src={Object.entries(article[1].variant)[0][1].url} alt="img_article"></img>
+                                            <img src={article.variant[0].images[0].uuid} alt="img_article"></img>
                                         </div>
                                         <div className='article_description'>
-                                            <span>
-                                                {article[1].description}
+                                            <span className='mg-left-2'>
+                                                {article.description}
                                             </span>
                                         </div>
                                         <div className='article_prix'>
-                                            <p className='cl-blue font-size-2'>{article[1].prix}$</p>
+                                            <p className='cl-blue font-size-2'>{article.prix}$</p>
                                             <button className='btn_ajouter_panier'>Ajouter au panier</button>
                                         </div>
                                     </div>

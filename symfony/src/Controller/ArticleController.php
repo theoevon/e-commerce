@@ -16,8 +16,8 @@ use App\Entity\Variant;
 use App\Entity\Image;
 use App\Repository\ImageRepository;
 use App\Repository\VariantRepository;
-use Symfony\Component\HttpFoundation\JsonResponse;
-
+use App\Entity\SubCategory;
+use Doctrine\Common\Collections\Expr\Value;
 
 class ArticleController extends AbstractController
 {
@@ -40,11 +40,11 @@ class ArticleController extends AbstractController
         $variantEntity = new Variant();
         $imageEntity = new Image();
         if ($file == "file") {
-            $file = "./file-ordinateur-fixe.json";
+            $file = "./file-composant.json";
             $file = file_get_contents($file);
             $data = json_decode($file);
             foreach ($data as $category => $categoryValue) {
-                $this->articleCategory($category, $categoryValue, $articleEntity, $variantEntity, $imageEntity, $entityManager, $categoryRepository, $subCategoryRepository);               
+                $this->articleCategory($category, $categoryValue, $articleEntity, $variantEntity, $imageEntity, $entityManager, $categoryRepository, $subCategoryRepository);
             }
         }
         $arr["status"] = "success";
@@ -56,14 +56,21 @@ class ArticleController extends AbstractController
         foreach ($categoryValue as $name => $value) {
             $dataCategory = $categoryRepository->findOneBy(['name' => $category]);
             $articleEntity->setCategory($dataCategory);
-            $dataSubCategory = $subCategoryRepository->findOneBy(['name' => $value->subCategory]);
+            if ($subCategoryRepository->findOneBy(['name' => $value->subCategory]) !== null) {
+                $dataSubCategory = $subCategoryRepository->findOneBy(['name' => $value->subCategory]);
+            } else {
+                $subCategory = new SubCategory();
+                $subCategory->setName($value->subCategory);
+                $dataSubCategory = $subCategory;
+                $entityManager->persist($subCategory);
+            }
             $articleEntity->setSubCategory($dataSubCategory);
             $articleEntity->setName($name);
             $articleEntity->setPrix($value->prix);
             $articleEntity->setDescription($value->caracteristique);
             $articleEntity->setPublishDate(date("Y-m-d"));
             $this->articleVariant($value->variant, $articleEntity, $variantEntity, $imageEntity, $entityManager, 'file');
-            $entityManager->clear(Article::class);  
+            $entityManager->clear(Article::class);
         }
     }
 
@@ -86,6 +93,7 @@ class ArticleController extends AbstractController
                 $entityManager->flush();
                 $entityManager->clear(Variant::class);
                 $entityManager->clear(Image::class);
+                $entityManager->clear(SubCategory::class);
             }
         }
         // else {
@@ -115,16 +123,16 @@ class ArticleController extends AbstractController
             $arr['category'] = $valueArticle->getCategory()->getName();
             $arr['subCategory'] = $valueArticle->getSubCategory()->getName();
             $valueVariant = $variantRepository->findBy(['article' => $valueArticle->getId()]);
-            foreach($valueVariant as $value) {
-            $valueImage = $imageRepository->findOneBy(['variant' => $value->getId()]);
-            $arr_temporaire[$value->getColor()] = ['fileName' => $valueImage->getFilename(), 'url' => $valueImage->getUuid()];
-            $arr['variant'] = $arr_temporaire;
+            foreach ($valueVariant as $value) {
+                $valueImage = $imageRepository->findOneBy(['variant' => $value->getId()]);
+                $arr_temporaire[$value->getColor()] = ['fileName' => $valueImage->getFilename(), 'url' => $valueImage->getUuid()];
+                $arr['variant'] = $arr_temporaire;
             }
             array_push($arr_api, $arr);
         } else {
             $data = $articles->findAll();
             foreach ($data as $valueArticle) {
-                $arr = []; 
+                $arr = [];
                 $arr['name'] = $valueArticle->getName();
                 $arr['description'] = $valueArticle->getDescription();
                 $arr['prix'] = $valueArticle->getPrix();
@@ -133,7 +141,7 @@ class ArticleController extends AbstractController
                 $arr['subCategory'] = $valueArticle->getSubCategory()->getName();
                 $valueVariant = $variantRepository->findBy(['article' => $valueArticle->getId()]);
                 $arr_temporaire = [];
-                foreach($valueVariant as $value) {
+                foreach ($valueVariant as $value) {
                     $valueImage = $imageRepository->findOneBy(['variant' => $value->getId()]);
                     $arr_temporaire[$value->getColor()] = ['fileName' => $valueImage->getFilename(), 'url' => $valueImage->getUuid()];
                     $arr['variant'] = $arr_temporaire;

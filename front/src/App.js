@@ -6,6 +6,7 @@ import Inscription from './page/inscription.js';
 import User from './Admin.js';
 import Ordinateur from './page/ordinateur.jsx';
 import ShowArticle from './page/showArticle';
+import Test from './page/test.jsx'
 
 function App(){
   return (
@@ -14,9 +15,10 @@ function App(){
         <Route exact path='/' element={< Accueil />}></Route>
         <Route path='/article/:category/:name' element={< ShowArticle />}></Route>
         <Route path='/article/:category' element={< Ordinateur />}></Route>
-        <Route exact path='/connexion' element={<Connexion/>}></Route>x
+        <Route exact path='/connexion' element={<Connexion/>}></Route>
         <Route exact path='/inscription' element={<Inscription/>}></Route>
         <Route exact path='/admin/*' element={<User/>}></Route>
+        <Route exact path='/test' element={<Test/>}></Route>
       </Routes>
     </Router>
   );

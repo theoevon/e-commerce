@@ -6,83 +6,75 @@ import { useParams } from 'react-router-dom'
 
 const Tablette = () => {
 
-    let { category } = useParams();
     let { name } = useParams();
 
     const [articles, setArticles] = useState([]);
     const [color, setColor] = useState('gris');
-    useEffect(() => {
 
+    useEffect(() => {
         async function getArticleData() {
             try {
-                const response = await axios.get("https://localhost:8000/showArticle");
-                const data = Object.entries(response.data)
 
-                setArticles(data);
+                const options = {
+                    url: 'https://localhost:8000/api/articles',
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json;charset=UTF-8'
+                    }
+                }
+                const response = await axios(options);
+                setArticles(response.data);
             }
             catch (error) {
                 console.log(error);
             }
         }
+
         getArticleData();
     }, []);
 
     return (
         <div className='app'>
             <Header />
-            <div className='en_tete'>
-                {articles.map((article) => {
-                    if (article[1].name === name) {
-                        return <div>
-                            <h1>{article[1].name}</h1>
-                            <h1>À PARTIR DE {article[1].prix} €</h1>
+
+            {articles.map((article) => {
+                if (article.name === name) {
+                    return <div>
+                        <div className='en_tete'>
+                            <h2>{article.name}</h2>
+                            <h2>À PARTIR DE {article.prix} €</h2>
                         </div>
-                    }
-                })}
-            </div>
-            <div className='flex'>
-                <div className='left'>
-                    {articles.map((article) => {
-                        if (article[1].name === name) {
-                            if (Object.entries(article[1].variant).length == 1) {
-                                return Object.entries(article[1].variant).map((variant) => {
-                                        return <div>
-                                            <img src={variant[1].url} alt="image_ipad" />
+                        <div className='flex'>
+                            <div className='left'>
+                                {article.variant.length === 1 ?
+                                    (<div>
+                                        <img src={article.variant[0].images[0].uuid} alt="image tablette" />
+                                        </div>)
+                                    : (<div>
+                                        {article.variant.map((variant) => {
+                                            if (variant.color === color) {
+                                                return <div>
+                                                    <img src={variant.images[0].uuid} alt="image tablette" />
+                                                </div>
+                                            }
+                                        })}
+                                    </div>)}
+                            </div>
+                            <div className='right'>
+                                <div className='div_couleur'>
+                                    {article.variant.map((variant) => {
+                                        return <div className='couleur' onClick={() => setColor(variant.color)}>
+                                            <div className={"rond_" + variant.color}></div>
+                                            <h3>{variant.color}</h3>
                                         </div>
-                                })
-                            }
-                            else {
-                                return Object.entries(article[1].variant).map((variant) => {
-                                    if (variant[0] === color) {
-                                        return <div>
-                                            <img src={variant[1].url} alt="image_ipad" />
-                                        </div>
-                                    }
-                                })
-                            }
-                        }
-                    })}
-                </div>
-                <div className='right'>
-                    <div className='titre_ipad'>
-                        <h1>ACHETER VOTRE {category}</h1>
-                        <h2>COULEUR</h2>
-                    </div>
-                    {articles.map((article) => {
-                        if (article[1].name === name) {
-                            return Object.entries(article[1].variant).map((variant) => {
-                                let colore = "rond_" + variant[0]
-                                return <div className='div_couleur'>
-                                    <div className='couleur' onClick={() => setColor(variant[0])}>
-                                        <div className={colore}></div>
-                                        <h3>{variant[0]}</h3>
-                                    </div>
+                                    })}
                                 </div>
-                            })
-                        }
-                    })}
-                </div>
-            </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            })}
             <Footer />
         </div>
     );

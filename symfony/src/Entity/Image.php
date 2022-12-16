@@ -73,15 +73,15 @@ class Image
         return $this;
     }
 
-    // public function getVariant(): ?Variant
-    // {
-    //     return $this->variant;
-    // }
+    public function getVariant(): ?Variant
+    {
+        return $this->variant;
+    }
 
-    // public function setVariant(?Variant $variant): self
-    // {
-    //     $this->variant = $variant;
+    public function setVariant(?Variant $variant): self
+    {
+        $this->variant = $variant;
 
-    //     return $this;
-    // }
+        return $this;
+    }
 }

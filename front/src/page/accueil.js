@@ -7,28 +7,27 @@ import axios from "axios";
 const Accueil = () => {
 
   const [articles, setArticles] = useState([]);
-  const [category , setCategory] = useState(null);
 
   useEffect(() => {
-
     async function getArticleData() {
       try {
-        const response = await axios.get("https://localhost:8000/showArticle");
-        const data = Object.entries(response.data)
-
-        setArticles(data);
+        const options = {
+          url: 'https://localhost:8000/api/articles',
+          method: 'GET',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json;charset=UTF-8'
+          }
+      }
+        const response = await axios(options);
+        setArticles(response.data);
       }
       catch (error) {
         console.log(error);
       }
     }
-
     getArticleData();
   }, []);
-
-  const test  = () => {
-    alert("coucou");
-  }
 
   return (
     <div className='app'>
@@ -39,19 +38,20 @@ const Accueil = () => {
             <h1>NOS PRODUITS</h1>
             <div className="all_article">
               {articles.map((article) => {
-                let url = article[1].category + "/" + article[1].name
+                let url = "/article/" + article.category.name + "/" + article.name
                 return <a href={url}>
                   <div className="article">
                     <div className="row_article">
                       <div className="text">
-                        <h2>{article[1].name}</h2>
+                        <h2>{article.name}</h2>
                         <p>DÉCOUVRIR &gt;</p>
                         <span>
-                        {article[1].description}
+                        {article.description}
                         </span>
+                        <p>{article.prix}$</p>
                       </div>
                       <div className="img_article">
-                        <img src={Object.entries(article[1].variant)[0][1].url} alt="img_article"></img>
+                        <img src={article.variant[0].images[0].uuid} alt="img_article"></img>
                       </div>
                     </div>
                   </div>

@@ -4,6 +4,7 @@
             "prix": 719.99,
             "caracteristique": "Disque dur 3.5` 20 To 7200 RPM 256 Mo Serial ATA 6 Gb/s pour NAS 512e (bulk)e",
             "category": "composant",
+            "subCategory": "annilator_R2",
             "variant": {
                 "noir": {
                     "size": 111,
@@ -31,24 +32,6 @@
                     "image": {
                         "fileName": "AMD Ryzen Threadripper PRO",
                         "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1052897808497266688/AMD_ryzen_pro.jpg"
-                    }
-                }
-            }
-        },
-        "MSI Creator P100X 11TE-1020FR": {
-            "prix": 3499.99,
-            "caracteristique": "Intel Core i9-11900K 32 Go SSD 1 To + HDD 2 To NVIDIA GeForce RTX 3070 Ti 8 Go Wi-Fi 6E/Bluetooth Windows 11 Professionnel",
-            "category": "composant",
-            "subCategory": "RDD2",
-            "variant": {
-                "blanc": {
-                    "size": 111,
-                    "price": "50",
-                    "weight": 46,
-                    "name": "test_2",
-                    "image": {
-                        "fileName": "MSI Creator",
-                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1052893343123771392/msi_blanc.jpg"
                     }
                 }
             }

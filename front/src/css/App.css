@@ -405,3 +405,7 @@ footer hr{
 .pd-bottom-4 {
   padding-bottom: 4%;
 }
+
+button {
+  cursor: pointer;
+}
