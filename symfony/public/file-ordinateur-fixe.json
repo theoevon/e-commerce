@@ -1,14 +1,13 @@
 {
     "ordinateur fixe": {
         "MSI MEG Trident X 12VTD-052FR": {
-            "prix": 2899.99,
             "caracteristique": "PC gamer Intel Core i7-12700K 32 Go SSD 1 To + HDD 1 To NVIDIA GeForce RTX 3070 8 Go Wi-Fi 6E/Bluetooth Windows 11 Famille",
             "category": "ordinateur fix",
             "subCategory": "annilator_R2",
             "variant": {
                 "noir": {
                     "size": 111,
-                    "price": "50",
+                    "price": "2899.99",
                     "weight": 46,
                     "name": "test_1",
                     "image": {
@@ -19,14 +18,13 @@
             }
         },
         "MSI MEG Aegis Ti5 12VTD-004EU": {
-            "prix": 3799.99,
             "caracteristique": "PC gamer Intel Core i7-12700K 64 Go SSD 2 To NVIDIA GeForce RTX 3070 8 Go Wi-Fi 6E/Bluetooth Windows 11 Professionnel",
             "category": "ordinateur fix",
             "subCategory": "annilator_R2",
             "variant": {
                 "noir": {
                     "size": 111,
-                    "price": "50",
+                    "price": "3799.99",
                     "weight": 46,
                     "name": "test_1",
                     "image": {
@@ -37,14 +35,13 @@
             }
         },
         "MSI Creator P100X 11TE-1020FR": {
-            "prix": 3499.99,
             "caracteristique": "Intel Core i9-11900K 32 Go SSD 1 To + HDD 2 To NVIDIA GeForce RTX 3070 Ti 8 Go Wi-Fi 6E/Bluetooth Windows 11 Professionnel",
             "category": "ordinateur fixe",
             "subCategory": "RDD2",
             "variant": {
                 "blanc": {
                     "size": 111,
-                    "price": "50",
+                    "price": "3499.99",
                     "weight": 46,
                     "name": "test_2",
                     "image": {
@@ -55,14 +52,13 @@
             }
         },
         "ASUS ROG STRIX GT15 GT15CF-71270F081W": {
-            "prix": 2399.99,
             "caracteristique": "PC gamer Intel Core i7-12700F 16 Go SSD 1 To NVIDIA GeForce RTX 3070 8 Go Wi-Fi 6/Bluetooth Windows 11 Famille",
             "category": "ordinateur fix",
             "subCategory": "RDD2",
             "variant": {
                 "noir": {
                     "size": 111,
-                    "price": "50",
+                    "price": "2399.99",
                     "weight": 46,
                     "name": "test_3",
                     "image": {

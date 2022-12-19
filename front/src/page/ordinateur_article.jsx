@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import { useParams } from 'react-router-dom'
 
-const Ordinateur_portable_article = () => {
+const Ordinateur_article = () => {
     let { category } = useParams();
     let { name } = useParams();
 
@@ -15,10 +15,16 @@ const Ordinateur_portable_article = () => {
 
         async function getArticleData() {
             try {
-                const response = await axios.get("https://localhost:8000/showArticle");
-                const data = Object.entries(response.data)
-
-                setArticles(data);
+                const options = {
+                    url: 'https://localhost:8000/api/articles',
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json;charset=UTF-8'
+                    }
+                }
+                const response = await axios(options);
+                setArticles(response.data);
             }
             catch (error) {
                 console.log(error);
@@ -35,16 +41,16 @@ const Ordinateur_portable_article = () => {
                 <div className='container_ordinateur_portable pd-bottom-2'>
                     <div className=''>
                         {articles.map((article) => {
-                            if (article[1].name === name) {
+                            if (article.name === name) {
                                 return <div>
-                                    <p className='mg-left-4'>{article[1].name}</p>
+                                    <p className='mg-left-4'>{article.name}</p>
                                     <div className='flex center'>
-                                        <img src={Object.entries(article[1].variant)[0][1].url} alt="image ordinateur portable" />
+                                        <img src={article.variant[0].images[0].uuid} alt="image ordinateur portable" />
                                         <div className='container_payement mg-left-4 pd-bottom-2'>
                                             <div className='flex center mg-top-4'>
                                                 <div>
                                                     <p className='font-size-2 mg-2'>
-                                                        {article[1].prix}$
+                                                        {article.variant[0].price}$
                                                     </p>
                                                     <p className='font-size-tva'>TVA INCLUS *</p>
                                                 </div>
@@ -74,7 +80,7 @@ const Ordinateur_portable_article = () => {
                                     </div>
                                     <div className='container_point_fort mg-left-4'>
                                         <p>LES POINT FORTS</p>
-                                        <p>{article[1].description}</p>
+                                        <p>{article.description}</p>
                                     </div>
                                 </div>
                             }
@@ -87,4 +93,4 @@ const Ordinateur_portable_article = () => {
     )
 }
 
-export default Ordinateur_portable_article
+export default Ordinateur_article

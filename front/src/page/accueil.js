@@ -48,7 +48,7 @@ const Accueil = () => {
                         <span>
                         {article.description}
                         </span>
-                        <p>{article.prix}$</p>
+                        <p>{article.variant[0].price}$</p>
                       </div>
                       <div className="img_article">
                         <img src={article.variant[0].images[0].uuid} alt="img_article"></img>

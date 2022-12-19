@@ -25,7 +25,6 @@ const Test = () => {
                 }
                 const response = await axios(options);
                 // const data = Object.entries(response.data)
-                console.log(response.data);
                 // setArticles(data);
             }
             catch (error) {

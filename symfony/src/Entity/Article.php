@@ -31,10 +31,6 @@ class Article
     #[Groups(['article:output', 'article:input'])]
     private ?string $description = null;
 
-    #[ORM\Column]
-    #[Groups(['article:output', 'article:input'])]
-    private ?int $prix = null;
-
     #[ORM\Column(length: 255)]
     #[Groups(['article:output', 'article:input'])]
     private ?string $publish_date = null;
@@ -86,18 +82,6 @@ class Article
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getPrix(): ?int
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(int $prix): self
-    {
-        $this->prix = $prix;
 
         return $this;
     }

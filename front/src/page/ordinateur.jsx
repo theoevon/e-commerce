@@ -96,7 +96,7 @@ const Ordinateur = () => {
                                             </span>
                                         </div>
                                         <div className='article_prix'>
-                                            <p className='cl-blue font-size-2'>{article.prix}$</p>
+                                            <p className='cl-blue font-size-2'>{article.variant[0].price}$</p>
                                             <button className='btn_ajouter_panier'>Ajouter au panier</button>
                                         </div>
                                     </div>
