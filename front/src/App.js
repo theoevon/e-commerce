@@ -26,7 +26,7 @@ function App(){
         <Route exact path='/connexion' element={<Connexion/>}></Route>
         <Route exact path='/inscription' element={<Inscription/>}></Route>
         <Route exact path='/admin/*' element={<User/>}></Route>
-        <Route exact path='/PC_portable' element={<PcPortable/>}></Route>
+        <Route exact path='/pc_portable' element={<PcPortable/>}></Route>
       </Routes>
     </Router>
   );
