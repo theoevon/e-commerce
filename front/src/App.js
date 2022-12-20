@@ -1,28 +1,22 @@
-import './App.css';
+import './css/App.css';
+import './css/ordinateur.css';
 import { BrowserRouter as Router,Routes, Route } from 'react-router-dom';
-import Accueil from './accueil.js';
-import Ipad from './component/ipadAir.js';
-import IpadGris from './ipadAirGris.js';
-import IpadRose from './ipadAirRose.js';
-import IpadBleu from './ipadAirBleu.js';
-import IpadMauve from './ipadAirMauve.js';
-import IpadLumiere from './ipadAirLumiere.js';
-import Connexion from './connexion.js';
-import Inscription from './inscription.js';
+import Accueil from './page/accueil.js';
+import Connexion from './page/connexion.js';
+import Inscription from './page/inscription.js';
 import User from './Admin.js';
-import PcPortable from './Pc_portable.js';
+import Ordinateur from './page/ordinateur.jsx';
+import ShowArticle from './page/showArticle';
+import Test from './page/test.jsx';
+import PcPortable from './page/ordinateur_article';
 
 function App(){
   return (
     <Router>
       <Routes>
         <Route exact path='/' element={< Accueil />}></Route>
-        <Route exact path='/ipad' element={< Ipad />}></Route>
-        <Route exact path='/ipad/gris' element={< IpadGris />}></Route>
-        <Route exact path='/ipad/rose' element={< IpadRose />}></Route>
-        <Route exact path='/ipad/bleu' element={< IpadBleu />}></Route>
-        <Route exact path='/ipad/mauve' element={< IpadMauve />}></Route>
-        <Route exact path='/ipad/lumiere' element={< IpadLumiere />}></Route>
+        <Route path='/article/:category/:name' element={< ShowArticle />}></Route>
+        <Route path='/article/:category' element={< Ordinateur />}></Route>
         <Route exact path='/connexion' element={<Connexion/>}></Route>
         <Route exact path='/inscription' element={<Inscription/>}></Route>
         <Route exact path='/admin/*' element={<User/>}></Route>

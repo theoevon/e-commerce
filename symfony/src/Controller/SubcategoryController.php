@@ -17,14 +17,12 @@ class SubcategoryController extends AbstractController
     #[Route('/addSubCategory', name: 'app_subcategory')]
     public function subcategory(Request $request, EntityManagerInterface $entityManager, CategoryRepository $categoryRepository): Response
     {
-        //data request => name , category
+        //data request => name 
 
         $subcategory = new SubCategory();
         $subcategory->setName($request->toArray()['name']);
 
         $data = $categoryRepository->findOneBy(['name' => $request->toArray()['category']]);
-
-        $subcategory->setCategory($data);
 
         $entityManager->persist($subcategory);
         try {
@@ -51,12 +49,10 @@ class SubcategoryController extends AbstractController
         if ($id != null) {
             $valueSubCategory = $subCategoryRepository->find($id);
             $arr['name'] = $valueSubCategory->getName();
-            $arr['category'] = $valueSubCategory->getCategory()->getName();
             $arr_api[$id] = $arr;
         } else {
             foreach ($data as $value) {
                 $arr['name'] = $value->getName();
-                $arr['category'] = $value->getCategory()->getName();
                 $arr_api[$value->getId()] = $arr;
             }
         }

@@ -1,0 +1,55 @@
+{
+    "composant": {
+        "Seagate IronWolf Pro 20 To (ST20000NE000)": {
+            "caracteristique": "Disque dur 3.5` 20 To 7200 RPM 256 Mo Serial ATA 6 Gb/s pour NAS 512e (bulk)e",
+            "category": "composant",
+            "subCategory": "annilator_R2",
+            "variant": {
+                "noir": {
+                    "size": 111,
+                    "price": "719.99",
+                    "weight": 46,
+                    "name": "test_1",
+                    "image": {
+                        "fileName": "Seagate IronWolf Pro",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1052897388207022161/seagate.jpg"
+                    }
+                }
+            }
+        },
+        "AMD Ryzen Threadripper PRO 5995WX (4.5 GHz Max.)": {
+            "caracteristique": "Processeur 64-Core 128-Threads socket sWRX8 Cache 256 Mo 7 nm TDP 280W ",
+            "category": "composant",
+            "subCategory": "annilator_R2",
+            "variant": {
+                "noir": {
+                    "size": 111,
+                    "price": "8699.99",
+                    "weight": 46,
+                    "name": "test_1",
+                    "image": {
+                        "fileName": "AMD Ryzen Threadripper PRO",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1052897808497266688/AMD_ryzen_pro.jpg"
+                    }
+                }
+            }
+        },
+        "PNY NVIDIA A16": {
+            "caracteristique": "64 Go GDDR6 ECC - PCI Express 4.0 x16 (NVIDIA A16)",
+            "category": "composant",
+            "subCategory": "RDD2",
+            "variant": {
+                "noir": {
+                    "size": 111,
+                    "price": "4599.99",
+                    "weight": 46,
+                    "name": "test_3",
+                    "image": {
+                        "fileName": "PNY NVIDIA",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1052898461512650782/PNY_NVIDIA.jpg"
+                    }
+                }
+            }
+        }
+    }
+}

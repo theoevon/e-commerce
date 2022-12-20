@@ -3,41 +3,53 @@
 namespace App\Entity;
 
 use App\Repository\FeatureRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: FeatureRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['article:output']],
+    denormalizationContext: ['groups' => ['article:input']],
+)]
 class Feature
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['article:output', 'article:input'])]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $id_article = null;
-
     #[ORM\Column(length: 50)]
+    #[Groups(['article:output', 'article:input'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    private ?string $content = null;
+    #[Groups(['article:output', 'article:input'])]
+    private ?string $value = null;
+
+    #[ORM\Column(length: 255)]
+    #[Groups(['article:output', 'article:input'])]
+    private ?string $type = null;
+
+    #[ORM\Column]
+    #[Groups(['article:output', 'article:input'])]
+    private ?bool $is_sortable = null;
+
+    #[ORM\ManyToOne(inversedBy: 'feature')]
+    private ?Variant $variant = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdArticle(): ?int
+    public function getVariant(): ?Variant
     {
-        return $this->id_article;
-    }
-
-    public function setIdArticle(int $id_article): self
-    {
-        $this->id_article = $id_article;
-
-        return $this;
+        return $this->variant;
     }
 
     public function getName(): ?string
@@ -52,14 +64,45 @@ class Feature
         return $this;
     }
 
-    public function getContent(): ?string
+    public function getValue(): ?string
     {
-        return $this->content;
+        return $this->value;
     }
 
-    public function setContent(string $content): self
+    public function setValue(string $value): self
     {
-        $this->content = $content;
+        $this->value = $value;
+
+        return $this;
+    }
+
+    public function setIsSortable(bool $is_sortable): self
+    {
+        $this->is_sortable = $is_sortable;
+
+        return $this;
+    }
+
+    public function getIsSortable(): ?string
+    {
+        return $this->is_sortable;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function setVariant(?Variant $variant): self
+    {
+        $this->variant = $variant;
 
         return $this;
     }

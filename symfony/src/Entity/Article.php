@@ -7,43 +7,54 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['article:output']],
+    denormalizationContext: ['groups' => ['article:input']],
+)]
 class Article
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['article:output', 'article:input'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['article:output', 'article:input'])]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['article:output', 'article:input'])]
     private ?string $description = null;
 
-    #[ORM\Column]
-    private ?int $prix = null;
-
     #[ORM\Column(length: 255)]
+    #[Groups(['article:output', 'article:input'])]
     private ?string $publish_date = null;
 
     #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[Groups(['article:output', 'article:input'])]
     private ?Category $category = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articles')]
-    private ?SubCategory $subCategory = null;
-
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Articlesales::class)]
+    #[Groups(['article:output', 'article:input'])]
     private Collection $articlesales;
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Variant::class)]
-    private Collection $variants;
+    #[Groups(['article:output', 'article:input'])]
+    private Collection $variant;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[Groups(['article:output', 'article:input'])]
+    private ?SubCategory $subCategory = null;
 
     public function __construct()
     {
         $this->articlesales = new ArrayCollection();
-        $this->variants = new ArrayCollection();
+        $this->variant = new ArrayCollection();
     }
  
     public function getId(): ?int
@@ -71,18 +82,6 @@ class Article
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    public function getPrix(): ?int
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(int $prix): self
-    {
-        $this->prix = $prix;
 
         return $this;
     }
@@ -121,8 +120,8 @@ class Article
         $this->subCategory = $subCategory;
 
         return $this;
-    }
-
+    } 
+    
     /**
      * @return Collection<int, Articlesales>
      */
@@ -156,15 +155,15 @@ class Article
     /**
      * @return Collection<int, Variant>
      */
-    public function getVariants(): Collection
+    public function getVariant(): Collection
     {
-        return $this->variants;
+        return $this->variant;
     }
 
     public function addVariant(Variant $variant): self
     {
-        if (!$this->variants->contains($variant)) {
-            $this->variants->add($variant);
+        if (!$this->variant->contains($variant)) {
+            $this->variant->add($variant);
             $variant->setArticle($this);
         }
 
@@ -173,7 +172,7 @@ class Article
 
     public function removeVariant(Variant $variant): self
     {
-        if ($this->variants->removeElement($variant)) {
+        if ($this->variant->removeElement($variant)) {
             // set the owning side to null (unless already changed)
             if ($variant->getArticle() === $this) {
                 $variant->setArticle(null);
@@ -182,5 +181,5 @@ class Article
 
         return $this;
     }
-    
+
 }

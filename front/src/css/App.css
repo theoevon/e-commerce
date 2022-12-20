@@ -1,0 +1,320 @@
+@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-family: 'Julius Sans One', sans-serif;
+}
+
+header {
+  background-color: #0A3782;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+footer {
+  background-color: #0A3782;
+  width: 100%;
+  color: white;
+}
+
+footer .img img {
+  max-width: 150px;
+  max-height: 100px;
+  filter: invert();
+}
+
+footer .text {
+  max-height: 140px;
+  margin-left: 1rem;
+  padding-top: 2rem;
+}
+
+footer .text h3 {
+  margin: 0;
+}
+
+footer .text h4 {
+  margin: 0;
+}
+
+.container_footer {
+  padding: 2rem;
+}
+
+.container_info_footer {
+  display: flex;
+}
+
+.info_footer {
+  display: flex;
+  margin-left: 1rem;
+  margin-right: 2rem;
+  padding: 1rem;
+}
+
+#logo {
+  width: 250px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.container {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#search {
+  width: 130%;
+  height: min-content;
+  padding: 10px;
+  margin: 0 5%;
+}
+
+#icon_account,
+#icon_panier {
+  filter: invert();
+  width: 30%;
+}
+
+#profil {
+  justify-content: right;
+}
+
+.info_icon {
+  color: white;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+.account,
+.panier {
+  text-align: center;
+  cursor: pointer;
+}
+
+.navbar {
+  background-color: #001e69;
+  width: 100%;
+  height: 3rem;
+}
+
+.body_article {
+  background-color: #eeeeee;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 5rem 0;
+}
+
+.container_article {
+  background-color: white;
+  padding: 2rem;
+  min-width: 90%;
+  border-radius: 10px;
+}
+
+.all_article {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  width: 90%;
+  margin: auto;
+}
+
+.article {
+  width: 100%;
+  padding: 1rem;
+  margin: 1%;
+  display: flex;
+  border-bottom: 1px solid black;
+  padding-bottom: 3rem;
+}
+
+.article:hover~p {
+  border-bottom: 1px solid #3B83EF;
+}
+
+.container_article h1 {
+  margin-left: 1%;
+}
+
+.container_article p {
+  color: #3B83EF;
+}
+
+.img_article img {
+  width: 256px;
+  height: 256px;
+  margin-right: 3rem;
+}
+
+.row_article {
+  display: flex;
+}
+
+.row_article {
+  justify-content: space-between;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+  width: 100%;
+  text-align: center;
+}
+
+.en_tete {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2rem;
+  border-bottom: 1px solid black;
+}
+
+.left,
+.right {
+  width: 50%;
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.left {
+  align-items: center;
+}
+
+.right {
+  flex-direction: column;
+}
+
+.div_couleur {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.couleur {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  min-width: 40%;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.couleur h3 {
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+.titre_ipad {
+  margin: 1rem;
+}
+
+.titre_ipad h1 {
+  margin-bottom: 4rem;
+}
+
+.titre_ipad h2 {
+  margin: 0;
+}
+
+.rond_gris,
+.rond_bleu,
+.rond_rose,
+.rond_violet,
+.rond_lumiere_stellaire {
+  min-width: 32px;
+  max-width: 32px;
+  min-height: 32px;
+  max-height: 32px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.rond_gris {
+  background-color: #737176;
+}
+
+.rond_bleu {
+  background-color: #90B4C3;
+}
+
+.rond_rose {
+  background-color: #E7D2CF;
+}
+
+.rond_violet {
+  background-color: #BFBDD3;
+}
+
+.rond_lumiere_stellaire {
+  background-color: #FAF7F2;
+}
+
+footer hr {
+  border: 1px solid white;
+  margin: 0 auto;
+}
+
+.logo {
+  text-align: center;
+  margin: 2rem;
+}
+
+.logo p {
+  margin: 0;
+}
+
+.copyright img {
+  width: 64px;
+  margin: 0 1rem;
+}
+
+.copyright h3 {
+  margin-right: 2rem;
+}
+
+#cadenas {
+  width: 32px;
+  filter: invert();
+}
+
+.row_footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.liste {
+  display: flex;
+  left: auto;
+  right: auto;
+  margin-top: 2rem;
+}
+
+.info_liste {
+  color: white;
+  padding-top: 1rem;
+}
+
+.text {
+  text-align: left;
+}
+
+.flex {
+  display: flex;
+}

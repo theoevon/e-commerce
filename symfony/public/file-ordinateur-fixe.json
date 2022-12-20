@@ -1,0 +1,72 @@
+{
+    "ordinateur fixe": {
+        "MSI MEG Trident X 12VTD-052FR": {
+            "caracteristique": "PC gamer Intel Core i7-12700K 32 Go SSD 1 To + HDD 1 To NVIDIA GeForce RTX 3070 8 Go Wi-Fi 6E/Bluetooth Windows 11 Famille",
+            "category": "ordinateur fix",
+            "subCategory": "annilator_R2",
+            "variant": {
+                "noir": {
+                    "size": 111,
+                    "price": "2899.99",
+                    "weight": 46,
+                    "name": "test_1",
+                    "image": {
+                        "fileName": "MSI MEG Trident",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1052893303068164146/msi_noir.jpg"
+                    }
+                }
+            }
+        },
+        "MSI MEG Aegis Ti5 12VTD-004EU": {
+            "caracteristique": "PC gamer Intel Core i7-12700K 64 Go SSD 2 To NVIDIA GeForce RTX 3070 8 Go Wi-Fi 6E/Bluetooth Windows 11 Professionnel",
+            "category": "ordinateur fix",
+            "subCategory": "annilator_R2",
+            "variant": {
+                "noir": {
+                    "size": 111,
+                    "price": "3799.99",
+                    "weight": 46,
+                    "name": "test_1",
+                    "image": {
+                        "fileName": "MSI MEG Aegis",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1052893359557070858/msi.jpg"
+                    }
+                }
+            }
+        },
+        "MSI Creator P100X 11TE-1020FR": {
+            "caracteristique": "Intel Core i9-11900K 32 Go SSD 1 To + HDD 2 To NVIDIA GeForce RTX 3070 Ti 8 Go Wi-Fi 6E/Bluetooth Windows 11 Professionnel",
+            "category": "ordinateur fixe",
+            "subCategory": "RDD2",
+            "variant": {
+                "blanc": {
+                    "size": 111,
+                    "price": "3499.99",
+                    "weight": 46,
+                    "name": "test_2",
+                    "image": {
+                        "fileName": "MSI Creator",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1052893343123771392/msi_blanc.jpg"
+                    }
+                }
+            }
+        },
+        "ASUS ROG STRIX GT15 GT15CF-71270F081W": {
+            "caracteristique": "PC gamer Intel Core i7-12700F 16 Go SSD 1 To NVIDIA GeForce RTX 3070 8 Go Wi-Fi 6/Bluetooth Windows 11 Famille",
+            "category": "ordinateur fix",
+            "subCategory": "RDD2",
+            "variant": {
+                "noir": {
+                    "size": 111,
+                    "price": "2399.99",
+                    "weight": 46,
+                    "name": "test_3",
+                    "image": {
+                        "fileName": "ASUS ROG STRIX",
+                        "uuid": "https://cdn.discordapp.com/attachments/973872783320817744/1052893398819946496/asus.jpg"
+                    }
+                }
+            }
+        }
+    }
+}

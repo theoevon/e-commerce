@@ -6,20 +6,25 @@ use App\Repository\SubCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SubCategoryRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['article:output']],
+    denormalizationContext: ['groups' => ['article:input']],
+)]
 class SubCategory
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['article:output', 'article:input'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['article:output', 'article:input'])]
     private ?string $name = null;
-
-    #[ORM\ManyToOne(inversedBy: 'subCategories')]
-    private ?Category $category = null;
 
     #[ORM\OneToMany(mappedBy: 'subCategory', targetEntity: Article::class)]
     private Collection $articles;
@@ -42,18 +47,6 @@ class SubCategory
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getCategory(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategory(?Category $category): self
-    {
-        $this->category = $category;
 
         return $this;
     }

@@ -4,19 +4,29 @@ namespace App\Entity;
 
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['article:output']],
+    denormalizationContext: ['groups' => ['article:input']],
+)]
 class Image
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['article:output', 'article:input'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['article:output', 'article:input'])]
     private ?string $uuid = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['article:output', 'article:input'])]
     private ?string $filename = null;
 
     #[ORM\ManyToOne(inversedBy: 'images')]

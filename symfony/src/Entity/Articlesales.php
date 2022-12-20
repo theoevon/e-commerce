@@ -4,29 +4,32 @@ namespace App\Entity;
 
 use App\Repository\ArticlesalesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ArticlesalesRepository::class)]
+#[ApiResource(
+    normalizationContext: ['groups' => ['article:output']],
+    denormalizationContext: ['groups' => ['article:input']],
+)]
 class Articlesales
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['article:output', 'article:input'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'articlesales')]
     private ?Article $article = null;
 
-    #[ORM\ManyToOne(inversedBy: 'articlesales')]
-    private ?Sales $sales = null;
+    #[ORM\Column]
+    #[Groups(['article:output', 'article:input'])]
+    private ?int $promotion = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdSale(): ?int
-    {
-        return $this->id_sale;
     }
 
     public function getArticle(): ?Article
@@ -41,14 +44,14 @@ class Articlesales
         return $this;
     }
 
-    public function getSales(): ?Sales
+    public function getPromotion(): ?int
     {
-        return $this->sales;
+        return $this->promotion;
     }
 
-    public function setSales(?Sales $sales): self
+    public function setPromotion(int $promotion): self
     {
-        $this->sales = $sales;
+        $this->promotion = $promotion;
 
         return $this;
     }
