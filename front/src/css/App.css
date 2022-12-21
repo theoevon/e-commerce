@@ -233,7 +233,9 @@ a {
 .rond_bleu,
 .rond_rose,
 .rond_violet,
-.rond_lumiere_stellaire {
+.rond_lumiere_stellaire,
+.rond_argent,
+.rond_noir {
   min-width: 32px;
   max-width: 32px;
   min-height: 32px;
@@ -265,6 +267,13 @@ a {
   background-color: #FAF7F2;
 }
 
+.rond_argent {
+  background-color: silver;
+}
+
+.rond_noir{
+  background-color: black;
+}
 footer hr {
   border: 1px solid white;
   margin: 0 auto;
