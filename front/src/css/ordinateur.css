@@ -67,12 +67,19 @@
 }
 
 .article {
+    padding: 1rem;
+    margin: 1%;
+    display: flex;
+    border-bottom: 1px solid black;
+    padding-bottom: 3rem;
     width: fit-content;
 }
-.MuiInputBase-root{
+
+.MuiInputBase-root {
     width: 100px !important;
 }
+
 input[type=number] {
     -moz-appearance: textfield;
     text-align: center;
-  }
+}

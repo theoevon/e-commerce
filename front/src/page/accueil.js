@@ -40,7 +40,7 @@ const Accueil = () => {
               {articles.map((article) => {
                 let url = "/article/" + article.category.name + "/" + article.name
                 return <a href={url}>
-                  <div className="article">
+                  <div className="article_accueil">
                     <div className="img_article">
                       <img src={article.variant[0].images[0].uuid} alt="img_article"></img>
                     </div>
