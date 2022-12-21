@@ -7,10 +7,14 @@ import { useParams } from 'react-router-dom'
 
 const Ordinateur = () => {
     const [articles, setArticles] = useState([]);
-    // const [category, setCategory] = useState(null);
-
     let { category } = useParams();
-    console.log("category_url = " + category);
+
+    const [search, setSearch] = useState('');
+
+  const research = (Data) => {
+    setSearch(Data)
+  }
+
    
     useEffect(() => {
         async function getArticleData() {
@@ -36,7 +40,7 @@ const Ordinateur = () => {
     return (
         <div className='ordinateur_portable'>
             <Header />
-            <h1> PRODUIS CORRESPONDENT</h1>
+            <h1>PRODUIS CORRESPONDENT</h1>
             <div className='container'>
                 <div className='filtre'>
                     <div className='container_filtre'>
@@ -103,6 +107,7 @@ const Ordinateur = () => {
                                 </div>
                             </div>
                         }
+
                     })
                     }
                 </div>

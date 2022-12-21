@@ -31,7 +31,7 @@ class ArticleController extends AbstractController
         $variantEntity = new Variant();
         $imageEntity = new Image();
         if ($file == "file") {
-            $file = "./file-ordinateur-portable.json";
+            $file = "./file-composant.json";
             $file = file_get_contents($file);
             $data = json_decode($file);
             foreach ($data as $category => $categoryValue) {
