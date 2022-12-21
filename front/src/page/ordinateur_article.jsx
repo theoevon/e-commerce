@@ -5,38 +5,34 @@ import axios from "axios";
 import { useParams } from 'react-router-dom'
 
 const Ordinateur_article = () => {
-    let { category } = useParams();
     let { name } = useParams();
 
     const [articles, setArticles] = useState([]);
-    const [color, setColor] = useState('noir');
 
     useEffect(() => {
-
         async function getArticleData() {
-            try {
-                const options = {
-                    url: 'http://localhost:8000/api/articles',
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json;charset=UTF-8'
-                    }
-                }
-                const response = await axios(options);
-                setArticles(response.data);
+          try {
+            const options = {
+              url: 'https://localhost:8000/api/articles',
+              method: 'GET',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=UTF-8'
+              }
             }
-            catch (error) {
-                console.log(error);
-            }
+            const response = await axios(options);
+            setArticles(response.data);
+          }
+          catch (error) {
+            console.log(error);
+          }
         }
         getArticleData();
-    }, []);
+      }, []);
 
     return (
         <div>
             <Header />
-
             <div className='flex center items-center body_ordinateur_portable_article'>
                 <div className='container_ordinateur_portable pd-bottom-2'>
                     <div className=''>

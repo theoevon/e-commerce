@@ -7,18 +7,20 @@ import InputSlider from './sliderBar.js';
 
 const Ordinateur = () => {
     const [articles, setArticles] = useState([]);
-    // const [category, setCategory] = useState(null);
-
     let { category } = useParams();
-    console.log("category_url = " + category);
 
-    let compteur = 0;
+    const [search, setSearch] = useState('');
 
+  const research = (Data) => {
+    setSearch(Data)
+  }
+  let compteur = 0;
+   
     useEffect(() => {
         async function getArticleData() {
             try {
                 const options = {
-                    url: 'http://localhost:8000/api/articles',
+                    url: 'https://localhost:8000/api/articles',
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',

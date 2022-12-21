@@ -54,6 +54,9 @@ class Variant
     #[ORM\OneToMany(mappedBy: 'variant', targetEntity: Feature::class)]
     private Collection $feature;
 
+    #[ORM\Column]
+    private ?int $popularity = 0;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -193,6 +196,18 @@ class Variant
                 $image->setVariant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPopularity(): ?int
+    {
+        return $this->popularity;
+    }
+
+    public function setPopularity(int $popularity): self
+    {
+        $this->popularity = $popularity;
 
         return $this;
     }
