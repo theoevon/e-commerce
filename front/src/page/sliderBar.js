@@ -5,42 +5,11 @@ import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
 import VolumeUp from '@mui/icons-material/VolumeUp';
-import axios from "axios";
-import { useParams } from 'react-router-dom';
 import React, { useEffect, useState } from 'react'
 
 const Input = styled(MuiInput)`
   width: 64px;
 `;
-
-const MaxPrice = () => {
-    const [articles, setArticles] = useState([]);
-
-    let { category } = useParams();
-
-    let maxPrice = 0;
-
-    useEffect(() => {
-        async function getArticleData() {
-            try {
-                const options = {
-                    url: 'http://localhost:8000/api/articles',
-                    method: 'GET',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json;charset=UTF-8'
-                    }
-                }
-                const response = await axios(options);
-                setArticles(response.data);
-            }
-            catch (error) {
-                console.log(error);
-            }
-        }
-        getArticleData();
-    }, []);
-}
 
 export default function InputSlider() {
 
@@ -61,9 +30,6 @@ export default function InputSlider() {
             setValue(9000);
         }
     };
-
-    let maxValue = MaxPrice();
-    console.log(maxValue)
 
     return (
         <Box sx={{ width: 300 }}>

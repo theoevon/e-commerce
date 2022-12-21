@@ -72,3 +72,7 @@
 .MuiInputBase-root{
     width: 100px !important;
 }
+input[type=number] {
+    -moz-appearance: textfield;
+    text-align: center;
+  }
