@@ -12,7 +12,7 @@ const Connexion = () => {
     const sendData = async (e) => {
         e.preventDefault();
 
-        await axios.post("https://localhost:8000/login", {
+        await axios.post("http://localhost:8000/login", {
             email: email,
             password: password
         })

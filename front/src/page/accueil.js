@@ -8,8 +8,8 @@ const Accueil = () => {
 
   const [articles, setArticles] = useState([]);
   const [search, setSearch] = useState('');
-  const [indexs , setIndexs] = useState([]);
-  const [limit , setLimit] = useState(10);
+  const [indexs, setIndexs] = useState([]);
+  const [limit, setLimit] = useState(10);
 
   const research = (Data) => {
     setSearch(Data)
@@ -25,12 +25,11 @@ const Accueil = () => {
             'Accept': 'application/json',
             'Content-Type': 'application/json;charset=UTF-8'
           }
-
         }
         const response = await axios(options);
         setArticles(response.data);
         const rendered = [];
-        for (let i = 1 ; i <= Math.ceil(response.data.length / 10); ++i) {
+        for (let i = 1; i <= Math.ceil(response.data.length / 10); ++i) {
           rendered.push(i);
         }
         setIndexs(rendered);
@@ -55,17 +54,18 @@ const Accueil = () => {
                   let url = "/article/" + article.category.name + "/" + article.name
                   return <a href={url}>
                     <div className="article">
+                      <div className="img_article">
+                        <img src={article.variant[0].images[0].uuid} alt="img_article"></img>
+                      </div>
                       <div className="row_article">
                         <div className="text">
                           <h2>{article.name}</h2>
-                          <p>DÉCOUVRIR &gt;</p>
                           <span>
                             {article.description}
                           </span>
                           <p>{article.variant[0].price}$</p>
-                        </div>
-                        <div className="img_article">
-                          <img src={article.variant[0].images[0].uuid} alt="img_article"></img>
+                          <br></br><br></br><br></br>
+                          <p>DÉCOUVRIR &gt;</p>
                         </div>
                       </div>
                     </div>
@@ -77,11 +77,11 @@ const Accueil = () => {
           </div>
         </div>
         <div className='pagination flex center '>
-              {indexs.map((index) => {
-                return <button onClick={(e) => setLimit(e.target.value * 10)} className='cl-blue' value={index} > 
-                  {index}
-                </button>
-              })}
+          {indexs.map((index) => {
+            return <button onClick={(e) => setLimit(e.target.value * 10)} className='cl-blue' value={index} >
+              {index}
+            </button>
+          })}
         </div>
       </div>
       <Footer />

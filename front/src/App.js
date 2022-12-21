@@ -1,5 +1,6 @@
 import './css/App.css';
 import './css/dropDawn.css';
+import './css/ordinateur.css';
 import { BrowserRouter as Router,Routes, Route } from 'react-router-dom';
 import Accueil from './page/accueil.js';
 import Connexion from './page/connexion.js';
@@ -7,7 +8,8 @@ import Inscription from './page/inscription.js';
 import User from './Admin.js';
 import Ordinateur from './page/ordinateur.jsx';
 import ShowArticle from './page/showArticle';
-import Test from './page/test.jsx'
+import Test from './page/test.jsx';
+import PcPortable from './page/ordinateur_article';
 
 function App(){
   return (
@@ -19,7 +21,7 @@ function App(){
         <Route exact path='/connexion' element={<Connexion/>}></Route>
         <Route exact path='/inscription' element={<Inscription/>}></Route>
         <Route exact path='/admin/*' element={<User/>}></Route>
-        <Route exact path='/test' element={<Test/>}></Route>
+        <Route exact path='/pc_portable' element={<PcPortable/>}></Route>
       </Routes>
     </Router>
   );
