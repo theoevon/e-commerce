@@ -1,0 +1,85 @@
+.produits_correspondant {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 3rem;
+}
+
+.produits_correspondant h1 {
+    border-bottom: 1px solid black;
+    padding-bottom: 1rem;
+    margin: 0;
+}
+
+.ordinateur_portable {
+    background-color: #D9D9D9;
+}
+
+.container_ordinateur {
+    padding: 5rem 0;
+}
+
+.vide {
+    min-height: 2.35rem;
+}
+
+.filtre {
+    background-color: #E4E4E4;
+    height: 100%;
+    padding: 0 2rem;
+    border-radius: 10px;
+}
+
+.title_filtre {
+    text-align: center;
+    font-weight: bold;
+}
+
+.title_filtre h2 {
+    margin: 0;
+}
+
+.container_filtre_article {
+    display: flex;
+}
+
+.info_supp {
+    width: 50%;
+}
+
+.prix {
+    color: #3B83EF;
+}
+
+.all_article {
+    background-color: white;
+    margin-left: 2rem;
+    border-radius: 10px;
+    padding: 2rem;
+}
+
+.ajt_panier {
+    border: 0;
+    padding: 1rem;
+    background-color: #3B83EF;
+    color: white;
+    cursor: pointer;
+}
+
+.article {
+    padding: 1rem;
+    margin: 1%;
+    display: flex;
+    border-bottom: 1px solid black;
+    padding-bottom: 3rem;
+    width: fit-content;
+}
+
+.MuiInputBase-root {
+    width: 100px !important;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    text-align: center;
+}

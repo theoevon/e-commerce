@@ -16,7 +16,7 @@ const Tablette = () => {
             try {
 
                 const options = {
-                    url: 'https://localhost:8000/api/articles',
+                    url: 'http://localhost:8000/api/articles',
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
@@ -43,7 +43,7 @@ const Tablette = () => {
                     return <div>
                         <div className='en_tete'>
                             <h2>{article.name}</h2>
-                            <h2>À PARTIR DE {article.prix} €</h2>
+                            <h2>À PARTIR DE {article.variant[0].price} €</h2>
                         </div>
                         <div className='flex'>
                             <div className='left'>

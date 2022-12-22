@@ -12,13 +12,13 @@ const Accueil = () => {
     async function getArticleData() {
       try {
         const options = {
-          url: 'https://localhost:8000/api/articles',
+          url: 'http://localhost:8000/api/articles',
           method: 'GET',
           headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json;charset=UTF-8'
+            'Accept': 'application/json',
+            'Content-Type': 'application/json;charset=UTF-8'
           }
-      }
+        }
         const response = await axios(options);
         setArticles(response.data);
       }
@@ -40,18 +40,19 @@ const Accueil = () => {
               {articles.map((article) => {
                 let url = "/article/" + article.category.name + "/" + article.name
                 return <a href={url}>
-                  <div className="article">
+                  <div className="article_accueil">
+                    <div className="img_article">
+                      <img src={article.variant[0].images[0].uuid} alt="img_article"></img>
+                    </div>
                     <div className="row_article">
                       <div className="text">
                         <h2>{article.name}</h2>
-                        <p>DÉCOUVRIR &gt;</p>
                         <span>
-                        {article.description}
+                          {article.description}
                         </span>
                         <p>{article.variant[0].price}$</p>
-                      </div>
-                      <div className="img_article">
-                        <img src={article.variant[0].images[0].uuid} alt="img_article"></img>
+                        <br></br><br></br><br></br>
+                        <p>DÉCOUVRIR &gt;</p>
                       </div>
                     </div>
                   </div>
