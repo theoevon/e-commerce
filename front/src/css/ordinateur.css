@@ -58,6 +58,12 @@
     padding: 2rem;
 }
 
+.btn_panier {
+    flex: 2;
+    display: flex;
+    justify-content: right;
+}
+
 .ajt_panier {
     border: 0;
     padding: 1rem;
@@ -72,7 +78,7 @@
     display: flex;
     border-bottom: 1px solid black;
     padding-bottom: 3rem;
-    width: fit-content;
+    min-width: fit-content;
 }
 
 .MuiInputBase-root {
@@ -82,4 +88,16 @@
 input[type=number] {
     -moz-appearance: textfield;
     text-align: center;
+}
+
+#savoir_plus {
+    cursor: pointer;
+}
+
+#savoir_plus:hover{
+    border-bottom: 1px solid #3B83EF;
+}
+
+.row {
+    display: flex;
 }

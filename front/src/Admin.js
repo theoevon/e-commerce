@@ -3,7 +3,7 @@ import jsonServerProvider from "ra-data-json-server";
 import { UserList } from "./users.js";
 import { PostList, PostEdit, PostCreate } from "./posts.js";
 
-const dataProvider = jsonServerProvider('http://localhost:8000/showArticle');
+const dataProvider = jsonServerProvider('http://localhost:8000/api');
 
 const User = () => ( 
 <Admin basename="/admin" dataProvider={dataProvider}>
