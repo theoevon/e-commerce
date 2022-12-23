@@ -13,7 +13,7 @@ const Header = () => {
                     </a>
                     <input type="text" placeholder="Recherche..." name="search" id="search"></input>
                     <div className="profil row">
-                        {cookies.get('user_name') !== 'undefind' ? (<a href='/'>
+                        {cookies.get('user_name') !== 'undefind' ? (<a href='/connexion'>
                                 <div className="account">
                                     <img src="https://cdn-icons-png.flaticon.com/512/5989/5989226.png" id="icon_account" alt="icon_account"></img>
                                     <p className="info_icon">Mon compte</p>

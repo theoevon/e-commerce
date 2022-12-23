@@ -154,6 +154,7 @@ footer .text h4 {
   width: 256px;
   height: 256px;
   margin-right: 3rem;
+  cursor: pointer;
 }
 
 .row_article {
