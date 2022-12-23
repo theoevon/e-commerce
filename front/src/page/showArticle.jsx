@@ -1,5 +1,5 @@
-import Tablette_article from './tablette_article.jsx';
-import Ordinateur_article from './ordinateur_article.jsx';
+import Tablette from './tablette_article.jsx';
+import Ordinateur from './ordinateur_article.jsx';
 import { useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 
@@ -10,14 +10,14 @@ const ShowArticle = () => {
 
     useEffect(() => {
         if (category === 'tablette') {
-            setComponent(<Tablette_article />)
+            setComponent(<Tablette />)
         }
-        else if (category === 'composant') {
-        }
+        // else if (category === 'composant') {
+        // }
         else {
-            setComponent(<Ordinateur_article />)
+            setComponent(<Ordinateur />)
         }
-    }, [])
+    }, [category])
 
     return (
         <div>

@@ -51,6 +51,10 @@ class Article
     #[Groups(['article:output', 'article:input'])]
     private ?SubCategory $subCategory = null;
 
+    #[ORM\Column]
+    #[Groups(['article:output', 'article:input'])]
+    private ?int $popularity = 0;
+
     public function __construct()
     {
         $this->articlesales = new ArrayCollection();
@@ -178,6 +182,18 @@ class Article
                 $variant->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPopularity(): ?int
+    {
+        return $this->popularity;
+    }
+
+    public function setPopularity(int $popularity): self
+    {
+        $this->popularity = $popularity;
 
         return $this;
     }

@@ -1,20 +1,13 @@
-import { useState } from 'react';
-import Child from './Child';
-
+// import react, { useState, useEffect } from 'react';
+// import Child from './child';
+// import axios from "axios";
 
 function Test() {
-  const [data, setData] = useState('');
-  
-  const childToParent = (childdata) => {
-    setData(childdata);
-  }
 
+  
   return (
     <div className="App">
-     {data}
-      <div>
-        <Child childToParent={childToParent}/>
-      </div>
+      {/* <Child /> */}    
     </div>
   );
 }

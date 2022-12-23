@@ -1,6 +1,7 @@
 import './css/App.css';
 import './css/dropDawn.css';
 import './css/ordinateur.css';
+import './css/shanyBootstrap.css';
 import { BrowserRouter as Router,Routes, Route } from 'react-router-dom';
 import Accueil from './page/accueil.js';
 import Connexion from './page/connexion.js';
@@ -22,6 +23,7 @@ function App(){
         <Route exact path='/inscription' element={<Inscription/>}></Route>
         <Route exact path='/admin/*' element={<User/>}></Route>
         <Route exact path='/pc_portable' element={<PcPortable/>}></Route>
+        <Route exact path='/test' element={<Test/>}></Route>        
       </Routes>
     </Router>
   );

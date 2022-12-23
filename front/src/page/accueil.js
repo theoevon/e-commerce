@@ -7,13 +7,10 @@ import axios from "axios";
 const Accueil = () => {
 
   const [articles, setArticles] = useState([]);
-  const [search, setSearch] = useState('');
   const [indexs, setIndexs] = useState([]);
   const [limit, setLimit] = useState(10);
 
-  const research = (Data) => {
-    setSearch(Data)
-  }
+  
 
   useEffect(() => {
     async function getArticleData() {
@@ -43,45 +40,43 @@ const Accueil = () => {
 
   return (
     <div className='app'>
-      <Header research={research} />
+      <Header />
       <div className='body_article'>
         <div className="container">
           <div className="container_article">
             <h1>NOS PRODUITS</h1>
             <div className="all_article">
               {articles.slice(limit - 10, limit).map((article) => {
-                if (article.name.indexOf(search) !== -1) {
-                  let url = "/article/" + article.category.name + "/" + article.name
-                  return <a href={url}>
-                    <div className="article">
-                      <div className="img_article">
-                        <img src={article.variant[0].images[0].uuid} alt="img_article"></img>
-                      </div>
-                      <div className="row_article">
-                        <div className="text">
-                          <h2>{article.name}</h2>
-                          <span>
-                            {article.description}
-                          </span>
-                          <p>{article.variant[0].price}$</p>
-                          <br></br><br></br><br></br>
-                          <p>DÉCOUVRIR &gt;</p>
-                        </div>
+                let url = "/article/" + article.category.name + "/" + article.name
+                return <a href={url}>
+                  <div className="article">
+                    <div className="img_article">
+                      <img src={article.variant[0].images[0].uuid} alt="img_article"></img>
+                    </div>
+                    <div className="row_article">
+                      <div className="text">
+                        <h2>{article.name}</h2>
+                        <span>
+                          {article.description}
+                        </span>
+                        <p>{article.variant[0].price}$</p>
+                        <br></br><br></br><br></br>
+                        <p>DÉCOUVRIR &gt;</p>
                       </div>
                     </div>
-                  </a>
-                }
+                  </div>
+                </a>
               })
               }
+              <div className='pagination flex center '>
+                {indexs.map((index) => {
+                  return <button onClick={(e) => setLimit(e.target.value * 10)} className='cl-blue' value={index} >
+                    {index}
+                  </button>
+                })}
+              </div>
             </div>
           </div>
-        </div>
-        <div className='pagination flex center '>
-          {indexs.map((index) => {
-            return <button onClick={(e) => setLimit(e.target.value * 10)} className='cl-blue' value={index} >
-              {index}
-            </button>
-          })}
         </div>
       </div>
       <Footer />

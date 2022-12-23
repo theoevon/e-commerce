@@ -6,16 +6,17 @@ import { useParams } from 'react-router-dom';
 import InputSlider from './sliderBar.js';
 
 const Ordinateur = () => {
-    const [articles, setArticles] = useState([]);
     let { category } = useParams();
+    const [articles, setArticles] = useState([]);
+    const [count, setCount] = useState(0);
+    const [indexs, setIndexs] = useState([]);
+    const [limit, setLimit] = useState(10);
+    const [limitPrice, setLimitPrice] = useState(9001);
 
-    const [search, setSearch] = useState('');
+    const price = (data) => {
+        setLimitPrice(data)
+    }
 
-  const research = (Data) => {
-    setSearch(Data)
-  }
-  let compteur = 0;
-   
     useEffect(() => {
         async function getArticleData() {
             try {
@@ -28,27 +29,32 @@ const Ordinateur = () => {
                     }
                 }
                 const response = await axios(options);
-                setArticles(response.data);
+                let arr = [];
+                response.data.filter(article => article.category.name === category && article.variant[0].price <= limitPrice)
+                    .map((article) => {
+                        return arr.push(article);
+                    })
+                setArticles(arr);
+                setCount(arr.length)
+                const rendered = [];
+                for (let i = 1; i <= Math.ceil(arr.length / 10); ++i) {
+                    rendered.push(i);
+                }
+                setIndexs(rendered);
             }
             catch (error) {
                 console.log(error);
             }
         }
         getArticleData();
-    }, []);
+    }, [category , limitPrice]);
 
     return (
         <div className='ordinateur_portable'>
             <Header />
             <div className='container container_ordinateur'>
-                {articles.map((article) => {
-                    if (article.category.name === category) {
-                        compteur += 1;
-                    }
-                })
-                }
                 <div className='produits_correspondant'>
-                    <h1>{compteur} PRODUITS CORRESPONDANT</h1>
+                    <h1>{count} PRODUITS CORRESPONDANT</h1>
                     <div className='vide'></div>
                 </div>
                 <div className='container_filtre_article'>
@@ -64,7 +70,7 @@ const Ordinateur = () => {
                                 <input type="text" placeholder='SELECTIONNER' />
                             </div>
                             <p>prix</p>
-                            <InputSlider />
+                            <InputSlider price={price} />
                             <div>
                                 <p>taille de l'ecran</p>
                                 <input type="text" placeholder='SELECTIONNER' />
@@ -88,31 +94,36 @@ const Ordinateur = () => {
                         </div>
                     </div>
                     <div className="all_article">
-                        {articles.map((article) => {
-                            if (article.category.name === category) {
-                                let url = "/article/" + article.category.name + "/" + article.name
-                                return <a href={url}>
-                                    <div className="article">
-                                        <div className="img_article">
-                                            <img src={article.variant[0].images[0].uuid} alt="img_article"></img>
-                                        </div>
-                                        <div className="row_article">
-                                            <div className="text">
-                                                <h2>{article.name}</h2>
-                                                <span>
-                                                    {article.description}
-                                                </span>
-                                                <br></br><br></br>
-                                                <p className='prix'>{article.variant[0].price}$</p>
-                                                <br></br><br></br>
-                                                <button className='ajt_panier'>AJOUTER AU PANIER</button>
-                                            </div>
+                        {articles.slice(0, limit).map((article) => {
+                            let url = "/article/" + article.category.name + "/" + article.name
+                            return <a key={article.name} href={url}>
+                                <div className="article">
+                                    <div className="img_article">
+                                        <img src={article.variant[0].images[0].uuid} alt="img_article"></img>
+                                    </div>
+                                    <div className="row_article">
+                                        <div className="text">
+                                            <h2>{article.name}</h2>
+                                            <span>
+                                                {article.description}
+                                            </span>
+                                            <br></br><br></br>
+                                            <p className='prix'>{article.variant[0].price}$</p>
+                                            <br></br><br></br>
+                                            <button className='ajt_panier'>AJOUTER AU PANIER</button>
                                         </div>
                                     </div>
-                                </a>
-                            }
+                                </div>
+                            </a>
                         })
                         }
+                        <div className='pagination flex center '>
+                            {indexs.map((index) => {
+                                return <button onClick={(e) => setLimit(e.target.value * 10)} className='cl-blue' value={index} >
+                                    {index}
+                                </button>
+                            })}
+                        </div>
                     </div>
                 </div>
             </div>

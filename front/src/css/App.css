@@ -63,6 +63,18 @@ footer .text h4 {
 .row {
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.test {
+  background-color: #737176;
+  border: 1px solid black;
+  margin-top: 3%;
+  display: inline-block;
+}
+
+.test a {
+  display: inline;
 }
 
 .container {
@@ -72,16 +84,17 @@ footer .text h4 {
 }
 
 #search {
-  width: 130%;
+  width: 25vw;
   height: min-content;
   padding: 10px;
-  margin: 0 5%;
 }
 
 #icon_account,
 #icon_panier {
   filter: invert();
-  width: 30%;
+  display: inline-block;
+  width: 5vw;
+  height: 5vw;
 }
 
 #profil {
@@ -98,6 +111,7 @@ footer .text h4 {
 .panier {
   text-align: center;
   cursor: pointer;
+  margin: 0% 25% 0% 25%;
 }
 
 .navbar {
@@ -313,8 +327,4 @@ footer hr {
 
 .text {
   text-align: left;
-}
-
-.flex {
-  display: flex;
 }
