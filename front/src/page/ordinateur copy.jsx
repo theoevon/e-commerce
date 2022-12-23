@@ -31,20 +31,18 @@ const Redirect = (url) => {
 
 const Ordinateur = () => {
     const [articles, setArticles] = useState([]);
+    // const [category, setCategory] = useState(null);
+
     let { category } = useParams();
+    console.log("category_url = " + category);
 
-    const [search, setSearch] = useState('');
+    let compteur = 0;
 
-  const research = (Data) => {
-    setSearch(Data)
-  }
-  let compteur = 0;
-   
     useEffect(() => {
         async function getArticleData() {
             try {
                 const options = {
-                    url: 'https://localhost:8000/api/articles',
+                    url: 'http://localhost:8000/api/articles',
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',

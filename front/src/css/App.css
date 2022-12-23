@@ -129,7 +129,7 @@ footer .text h4 {
   margin: auto;
 }
 
-.article {
+.article_accueil {
   width: 100%;
   padding: 1rem;
   margin: 1%;
@@ -154,6 +154,7 @@ footer .text h4 {
   width: 256px;
   height: 256px;
   margin-right: 3rem;
+  cursor: pointer;
 }
 
 .row_article {
@@ -271,9 +272,10 @@ a {
   background-color: silver;
 }
 
-.rond_noir{
+.rond_noir {
   background-color: black;
 }
+
 footer hr {
   border: 1px solid white;
   margin: 0 auto;

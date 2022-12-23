@@ -4,10 +4,23 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource(
+    normalizationContext:['groups' => ['read']]
+)]
+#[GetCollection(security: "is_granted('ROLE_USER')")]
+#[Post]
+#[Get]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -16,9 +29,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(["read"])]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Groups(["read"])]
     private array $roles = [];
 
     /**
@@ -28,15 +43,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 25)]
+    #[Groups(["read"])]
     private ?string $pseudo = null;
 
     #[ORM\Column]
     private ?bool $is_admin = false;
 
     #[ORM\Column]
+    #[Groups(["read"])]
     private ?bool $is_verifed = false;
 
     #[ORM\Column(length: 12)]
+    #[Groups(["read"])]
     private ?string $createAt = null;
 
     public function getId(): ?int
