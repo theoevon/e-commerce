@@ -143,7 +143,7 @@ footer .text h4 {
   margin: auto;
 }
 
-.article {
+.article_accueil {
   width: 100%;
   padding: 1rem;
   margin: 1%;
@@ -168,6 +168,7 @@ footer .text h4 {
   width: 256px;
   height: 256px;
   margin-right: 3rem;
+  cursor: pointer;
 }
 
 .row_article {
@@ -247,7 +248,9 @@ a {
 .rond_bleu,
 .rond_rose,
 .rond_violet,
-.rond_lumiere_stellaire {
+.rond_lumiere_stellaire,
+.rond_argent,
+.rond_noir {
   min-width: 32px;
   max-width: 32px;
   min-height: 32px;
@@ -277,6 +280,14 @@ a {
 
 .rond_lumiere_stellaire {
   background-color: #FAF7F2;
+}
+
+.rond_argent {
+  background-color: silver;
+}
+
+.rond_noir {
+  background-color: black;
 }
 
 footer hr {

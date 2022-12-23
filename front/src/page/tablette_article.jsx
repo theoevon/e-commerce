@@ -37,9 +37,8 @@ const Tablette = () => {
     return (
         <div className='app'>
             <Header />
-
             {articles.filter(article => article.name === name).map((article) => {
-                return <div key={article.name}>
+                return <div>
                     <div className='en_tete'>
                         <h2>{article.name}</h2>
                         <h2>À PARTIR DE {article.variant[0].price} €</h2>

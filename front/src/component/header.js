@@ -5,8 +5,7 @@ import Search from "./barre_de_recherche.jsx"
 
 const Header = ({ research }) => {
     let cookies = new Cookies();
-    // const [articleSearch, setArticleSearch] = useState('');
-
+    
     return (
         <header>
             <div className="container">
@@ -19,9 +18,7 @@ const Header = ({ research }) => {
                         <a href='/connexion'>
                             <div className="account">
                                 <img src="https://cdn-icons-png.flaticon.com/512/5989/5989226.png" id="icon_account" alt="icon_account"></img>
-                                <p className="info_icon">Mon compte</p>
-                            </div>
-                        </a>
+                                <p className="info_icon">Mon compte</p></div></a>
                         <a href="/panier">
                             <div className="panier">
                                 <img src="https://cdn-icons-png.flaticon.com/512/481/481383.png" id="icon_panier" alt="icon_panier"></img>

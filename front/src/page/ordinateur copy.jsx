@@ -30,22 +30,19 @@ const Redirect = (url) => {
 }
 
 const Ordinateur = () => {
-    let { category } = useParams();
     const [articles, setArticles] = useState([]);
-    const [count, setCount] = useState(0);
-    const [indexs, setIndexs] = useState([]);
-    const [limit, setLimit] = useState(10);
-    const [limitPrice, setLimitPrice] = useState(9001);
+    // const [category, setCategory] = useState(null);
 
-    const price = (data) => {
-        setLimitPrice(data)
-    }
+    let { category } = useParams();
+    console.log("category_url = " + category);
+
+    let compteur = 0;
 
     useEffect(() => {
         async function getArticleData() {
             try {
                 const options = {
-                    url: 'https://localhost:8000/api/articles',
+                    url: 'http://localhost:8000/api/articles',
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
@@ -53,32 +50,27 @@ const Ordinateur = () => {
                     }
                 }
                 const response = await axios(options);
-                let arr = [];
-                response.data.filter(article => article.category.name === category && article.variant[0].price <= limitPrice)
-                    .map((article) => {
-                        return arr.push(article);
-                    })
-                setArticles(arr);
-                setCount(arr.length)
-                const rendered = [];
-                for (let i = 1; i <= Math.ceil(arr.length / 10); ++i) {
-                    rendered.push(i);
-                }
-                setIndexs(rendered);
+                setArticles(response.data);
             }
             catch (error) {
                 console.log(error);
             }
         }
         getArticleData();
-    }, [category , limitPrice]);
+    }, []);
 
     return (
         <div className='ordinateur_portable'>
             <Header />
             <div className='container container_ordinateur'>
+                {articles.map((article) => {
+                    if (article.category.name === category) {
+                        compteur += 1;
+                    }
+                })
+                }
                 <div className='produits_correspondant'>
-                    <h1>{count} PRODUITS CORRESPONDANT</h1>
+                    <h1>{compteur} PRODUITS CORRESPONDANT</h1>
                     <div className='vide'></div>
                 </div>
                 <div className='container_filtre_article'>
@@ -94,7 +86,7 @@ const Ordinateur = () => {
                                 <input type="text" placeholder='SELECTIONNER' />
                             </div>
                             <p>prix</p>
-                            <InputSlider price={price} />
+                            <InputSlider />
                             <div>
                                 <p>taille de l'ecran</p>
                                 <input type="text" placeholder='SELECTIONNER' />
@@ -145,13 +137,6 @@ const Ordinateur = () => {
                             }
                         })
                         }
-                        <div className='pagination flex center '>
-                            {indexs.map((index) => {
-                                return <button onClick={(e) => setLimit(e.target.value * 10)} className='cl-blue' value={index} >
-                                    {index}
-                                </button>
-                            })}
-                        </div>
                     </div>
                 </div>
             </div>

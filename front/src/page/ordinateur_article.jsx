@@ -11,24 +11,24 @@ const Ordinateur_article = () => {
 
     useEffect(() => {
         async function getArticleData() {
-          try {
-            const options = {
-              url: 'https://localhost:8000/api/articles',
-              method: 'GET',
-              headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json;charset=UTF-8'
-              }
+            try {
+                const options = {
+                    url: 'https://localhost:8000/api/articles',
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json;charset=UTF-8'
+                    }
+                }
+                const response = await axios(options);
+                setArticles(response.data);
             }
-            const response = await axios(options);
-            setArticles(response.data);
-          }
-          catch (error) {
-            console.log(error);
-          }
+            catch (error) {
+                console.log(error);
+            }
         }
         getArticleData();
-      }, []);
+    }, []);
 
     return (
         <div>
@@ -36,8 +36,8 @@ const Ordinateur_article = () => {
             <div className='flex center items-center body_ordinateur_portable_article'>
                 <div className='container_ordinateur_portable pd-bottom-2'>
                     <div className=''>
-                        {articles.map((article) => {
-                            if (article.name === name) {
+                        {articles.filter(article => article.name === name)
+                            .map((article) => {
                                 return <div>
                                     <p className='mg-left-4'>{article.name}</p>
                                     <div className='flex center'>
@@ -72,15 +72,13 @@ const Ordinateur_article = () => {
                                                 <button className='btn'>AJOUTER AU PANIER</button>
                                             </div>
                                         </div>
-
                                     </div>
                                     <div className='container_point_fort mg-left-4'>
                                         <p>LES POINT FORTS</p>
                                         <p>{article.description}</p>
                                     </div>
                                 </div>
-                            }
-                        })}
+                            })}
                     </div>
                 </div>
             </div>

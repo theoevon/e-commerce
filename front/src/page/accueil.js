@@ -47,8 +47,7 @@ const Accueil = () => {
             <h1>NOS PRODUITS</h1>
             <div className="all_article">
               {articles.slice(limit - 10, limit).map((article) => {
-                let url = "/article/" + article.category.name + "/" + article.name
-                return <a href={url}>
+                return <a href={"/article/" + article.category.name + "/" + article.name}>
                   <div className="article">
                     <div className="img_article">
                       <img src={article.variant[0].images[0].uuid} alt="img_article"></img>
