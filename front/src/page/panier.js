@@ -14,6 +14,7 @@ const Panier = () => {
     const [articles, setArticles] = useState([]);
     const [test, setTest] = useState(1);
 
+    
     const Quantite = (e,prix_base) => {
         let value = e.target.value * prix_base;
         let id = e.target.id;
