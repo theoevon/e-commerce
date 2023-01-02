@@ -1,15 +1,21 @@
 import { Admin, Resource } from "react-admin";
+
 import jsonServerProvider from "ra-data-json-server";
+
 import { UserList } from "./users.js";
+
 import { PostList, PostEdit, PostCreate } from "./posts.js";
 
-const dataProvider = jsonServerProvider('http://localhost:8000/api');
+import { HydraAdmin, ResourceGuesser } from "@api-platform/admin";
 
-const User = () => ( 
-<Admin basename="/admin" dataProvider={dataProvider}>
-<Resource name="article" list={UserList} recordRepresentation="name" />
-<Resource name="posts" list={PostList} edit={PostEdit} create={PostCreate}  />
- </Admin>
+
+
+const User = () => (
+
+<HydraAdmin basename="/admin" entrypoint="http://localhost:8000/api">
+
+ </HydraAdmin>
+
 );
 
 export default User;
