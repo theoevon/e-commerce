@@ -22,7 +22,6 @@ const AjouterPanier = (event) => {
             alert("L'article est déjà dans votre panier !");
         }
     }
-    console.log(window.localStorage.getItem('article_add'));
 }
 
 const Redirect = (url) => {
