@@ -36,6 +36,7 @@ const Ordinateur = () => {
     const [indexs, setIndexs] = useState([]);
     const [limit, setLimit] = useState(10);
     const [limitPrice, setLimitPrice] = useState(9001);
+    const token = 'fdgsgsf'
 
     const price = (data) => {
         setLimitPrice(data)
@@ -49,8 +50,10 @@ const Ordinateur = () => {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
-                        'Content-Type': 'application/json;charset=UTF-8'
-                    }
+                        'Content-Type': 'application/json;charset=UTF-8',
+                    },
+                    body:`Bearer ${token}`
+
                 }
                 const response = await axios(options);
                 let arr = [];
@@ -120,7 +123,7 @@ const Ordinateur = () => {
                     <div className="all_article">
                         {articles.map((article) => {
                             if (article.category.name === category) {
-                                let url = "/article/" + article.category.name + "/" + article.name
+                                let url = "/article/" + article.category.name + "/" + article.id
                                 return <div className="article">
                                     <div className="img_article">
                                         <img src={article.variant[0].images[0].uuid} alt="img_article" onClick={() => Redirect(url)}></img>
