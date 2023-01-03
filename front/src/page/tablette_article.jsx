@@ -6,17 +6,19 @@ import { useParams } from 'react-router-dom'
 
 const Tablette = () => {
 
-    let { name } = useParams();
-
-    const [articles, setArticles] = useState([]);
+    let { id } = useParams();
+    const [name, setName] = useState(null);
+    const [price, setPrice] = useState(null);
+    const [length , setLength] = useState(null);
+    const [uuid , setUuid] = useState(null)
     const [color, setColor] = useState('gris');
+    const [variants , setVariants] = useState([]);
 
     useEffect(() => {
         async function getArticleData() {
             try {
-
                 const options = {
-                    url: 'https://localhost:8000/api/articles',
+                    url: 'https://localhost:8000/api/articles/' + id ,
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
@@ -24,7 +26,11 @@ const Tablette = () => {
                     }
                 }
                 const response = await axios(options);
-                setArticles(response.data);
+                setName(response.data.name);
+                setPrice(response.data.variant[0].price)
+                setLength(response.data.variant.length)
+                setUuid(response.data.variant[0].images[0].uuid)
+                setVariants(response.data.variant);
             }
             catch (error) {
                 console.log(error);
@@ -37,20 +43,19 @@ const Tablette = () => {
     return (
         <div className='app'>
             <Header />
-            {articles.filter(article => article.name === name).map((article) => {
-                return <div>
+                <div>
                     <div className='en_tete'>
-                        <h2>{article.name}</h2>
-                        <h2>À PARTIR DE {article.variant[0].price} €</h2>
+                        <h2>{name}</h2>
+                        <h2>À PARTIR DE {price}€</h2>
                     </div>
                     <div className='flex'>
                         <div className='left'>
-                            {article.variant.length === 1 ?
+                            {length === 1 ?
                                 (<div>
-                                    <img src={article.variant[0].images[0].uuid} alt="tablette" />
+                                    <img src={uuid} alt="tablette" />
                                 </div>)
                                 : (<div>
-                                    {article.variant.filter(variant => variant.color === color).map((variant) => {
+                                    {variants.filter(variant => variant.color === color).map((variant) => {
                                         return <div>
                                             <img src={variant.images[0].uuid} alt="tablette" />
                                         </div>
@@ -59,7 +64,7 @@ const Tablette = () => {
                         </div>
                         <div className='right'>
                             <div className='div_couleur'>
-                                {article.variant.map((variant) => {
+                                {variants.map((variant) => {
                                     return <div className='couleur' onClick={() => setColor(variant.color)}>
                                         <div className={"rond_" + variant.color}></div>
                                         <h3>{variant.color}</h3>
@@ -69,7 +74,6 @@ const Tablette = () => {
                         </div>
                     </div>
                 </div>
-            })}
             <Footer />
         </div>
     );

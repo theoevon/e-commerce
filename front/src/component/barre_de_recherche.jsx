@@ -42,7 +42,7 @@ function Search() {
       <input onChange={(e) => research(e.target.value)} type="text" className='search' placeholder='search' />
       <div style={{ 'display': display }} class="dropdown-content">
         {articles.map((article) => {
-          let url = "/article/" + article.category.name + "/" + article.name
+          let url = "/article/" + article.category.name + "/" + article.id
           return <a href={url} className='flex'>
             <p>{article.name}</p>
             <img src={article.variant[0].images[0].uuid} alt="article" />
