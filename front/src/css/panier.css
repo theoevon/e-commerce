@@ -90,7 +90,7 @@ table {
     background-color: #D9D9D9;
     margin-left: 1rem;
     text-align: center;
-    padding: 1rem;
+    padding: 2rem 1rem;
 }
 
 .flex_2 {
@@ -111,4 +111,8 @@ table {
 }
 .croix:hover{
     filter: invert(21%) sepia(100%) saturate(7414%) hue-rotate(359deg) brightness(94%) contrast(117%);
+}
+.panier{
+    margin: 0;
+    cursor: auto;
 }
