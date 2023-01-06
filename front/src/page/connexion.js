@@ -1,7 +1,6 @@
 import '../css/log.css';
 import React, { useState } from 'react';
 import axios from "axios";
-import Cookies from 'universal-cookie';
 import { useNavigate } from 'react-router-dom';
 
 const Connexion = () => {
@@ -12,22 +11,18 @@ const Connexion = () => {
     const sendData = async (e) => {
         e.preventDefault();
 
-        await axios.post("http://localhost:8000/login", {
+        await axios.post("http://localhost:8000/auth", {
             email: email,
             password: password
         })
-            .then((response) => {
-                if (response.data.status === "success") {
-                    let cookies = new Cookies();
-                    cookies.set('user_name', response.data.name , {
-                    sameSite: "none",
-                    secure: true})
-                    navigation('/');
-                }
-            })
-            .catch((error) => {
-                alert("utilisateur non reconnue")
-            })
+        .then((response) => {
+            console.log(response);
+            const token = response.data.token;
+            localStorage.setItem("token", token);
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }
 
     return (

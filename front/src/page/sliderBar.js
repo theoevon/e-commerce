@@ -1,19 +1,19 @@
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+// import Typography from '@mui/material/Typography';
 import Slider from '@mui/material/Slider';
 import MuiInput from '@mui/material/Input';
-import VolumeUp from '@mui/icons-material/VolumeUp';
-import React, { useEffect, useState } from 'react'
+// import VolumeUp from '@mui/icons-material/VolumeUp';
+import React, { useState, useEffect } from 'react'
 
 const Input = styled(MuiInput)`
   width: 64px;
 `;
 
-export default function InputSlider() {
+export default function InputSlider({ price }) {
 
-    const [value, setValue] = React.useState(9000);
+    const [value, setValue] = useState(9000);
 
     const handleSliderChange = (event, newValue) => {
         setValue(newValue);
@@ -21,6 +21,7 @@ export default function InputSlider() {
 
     const handleInputChange = (event) => {
         setValue(event.target.value === '' ? '' : Number(event.target.value));
+        price(value);
     };
 
     const handleBlur = () => {
@@ -31,13 +32,19 @@ export default function InputSlider() {
         }
     };
 
+    useEffect(() => {
+        if (value === 9000) {
+            price(value);
+        }
+    }, [value , price])
+
     return (
         <Box sx={{ width: 300 }}>
             <Grid container spacing={2} alignItems="center">
                 <Grid item>
                 </Grid>
                 <Grid item xs>
-                    <Slider
+                    <Slider onMouseUp={() => price(value)}
                         value={typeof value === 'number' ? value : 0}
                         onChange={handleSliderChange}
                         aria-labelledby="input-slider"

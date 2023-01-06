@@ -1,0 +1,31 @@
+.flex {
+    display: flex;
+  }
+
+.center {
+    justify-content: center;
+}
+
+.items-center {
+    align-items: center;
+}
+ 
+.ft-size-6 {
+    font-size: 6%;
+}
+
+.ft-size-8 {
+    font-size: 50%;
+}
+
+.pd-1 {
+    padding: 1%;
+}
+
+.mg-1 {
+    margin: 1%;
+}
+
+.row a {
+    width: fit-content;
+}

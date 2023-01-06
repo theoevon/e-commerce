@@ -18,18 +18,22 @@ security:
         dev:
             pattern: ^/_(profiler|wdt)
             security: false
-        api:
-            pattern: ^/api/
+        login:
+            pattern: ^/auth
             stateless: true
-            provider: app_user_provider
-            jwt: ~
-        main:
+            login_throttling:
+                max_attempts: 5
             json_login:
                 check_path: /auth # The name in routes.yaml is enough for mapping
                 username_path: email
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        api:
+            pattern: ^/api/
+            stateless: true
+            provider: app_user_provider
+            jwt: ~
             # custom_authenticators: 
             #     - App\Security\ApiLoginControllerAuthenticator
 

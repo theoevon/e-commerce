@@ -8,19 +8,28 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Apiresource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ApiResource(
-    normalizationContext:['groups' => ['read']]
+    normalizationContext: ['groups' => ['user']],
+    denormalizationContext: ['groups' => ['user', 'user.write']],
 )]
-#[GetCollection(security: "is_granted('ROLE_USER')")]
-#[Post]
-#[Get]
+// #[GetCollection(security: "is_granted('ROLE_ADMIN')")]
+// #[Get]
+// #[Put]
+// #[Delete]
+// #[UniqueEntity(
+//     fields: ['email'],
+//     message: ['This email is already use'],
+// )]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -29,32 +38,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    #[Groups(["read"])]
+    #[Groups(["user"])]
     private ?string $email = null;
 
     #[ORM\Column]
-    #[Groups(["read"])]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups(["user.write"])]
     private ?string $password = null;
 
     #[ORM\Column(length: 25)]
-    #[Groups(["read"])]
+    #[Groups(["user"])]
     private ?string $pseudo = null;
 
     #[ORM\Column]
     private ?bool $is_admin = false;
 
     #[ORM\Column]
-    #[Groups(["read"])]
+    #[Groups(["user"])]
     private ?bool $is_verifed = false;
 
     #[ORM\Column(length: 12)]
-    #[Groups(["read"])]
+    #[Groups(["user"])]
     private ?string $createAt = null;
 
     public function getId(): ?int

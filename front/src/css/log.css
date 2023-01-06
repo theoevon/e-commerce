@@ -24,16 +24,7 @@ header{
   margin-left: auto;
   margin-right: auto;
 }
-#search{
-  width: 130%;
-  height: min-content;
-  padding: 10px;
-  margin: 0 5%;
-}
-#icon_account, #icon_panier{
-  filter: invert();
-  width: 30%;
-}
+
 #profil{
   justify-content: right;
 }
