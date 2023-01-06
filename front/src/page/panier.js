@@ -73,6 +73,11 @@ const Panier = () => {
         }
     }
 
+    const paiement = () => {
+        axios.post('http://localhost:8000/paiement', articles)
+    .then(response => window.location.href=response.data);
+    }
+
     useEffect(() => {
         async function getArticleData() {
             try {
@@ -96,7 +101,7 @@ const Panier = () => {
                     }
                 })
                 setArticles(items);
-
+               
             }
             catch (error) {
                 console.log(error);
@@ -169,7 +174,7 @@ const Panier = () => {
                                         <h3>Frais de livraison</h3>
                                         <h3 className='flex_2'>Gratuits</h3>
                                     </div>
-                                    <div className="btn">COMMANDER</div>
+                                    <div className="btn" onClick={() => paiement()}>COMMANDER</div>
                                 </div>
                             }
                         </div>
