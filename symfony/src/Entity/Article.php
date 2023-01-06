@@ -9,12 +9,22 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['article:output']],
     denormalizationContext: ['groups' => ['article:input']],
 )]
+// #[Post(security: "is_granted('ROLE_ADMIN')")]
+// #[GetCollection]
+// #[Get]
+// #[Put(security: "is_granted('ROLE_ADMIN')")]
+// #[Delete(security: "is_granted('ROLE_ADMIN')")]
 class Article
 {
     #[ORM\Id]
@@ -50,10 +60,6 @@ class Article
     #[ORM\ManyToOne(inversedBy: 'articles')]
     #[Groups(['article:output', 'article:input'])]
     private ?SubCategory $subCategory = null;
-
-    #[ORM\Column]
-    #[Groups(['article:output', 'article:input'])]
-    private ?int $popularity = 0;
 
     public function __construct()
     {
@@ -182,18 +188,6 @@ class Article
                 $variant->setArticle(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getPopularity(): ?int
-    {
-        return $this->popularity;
-    }
-
-    public function setPopularity(int $popularity): self
-    {
-        $this->popularity = $popularity;
 
         return $this;
     }

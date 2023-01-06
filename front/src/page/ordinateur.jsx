@@ -22,7 +22,6 @@ const AjouterPanier = (event) => {
             alert("L'article est déjà dans votre panier !");
         }
     }
-    console.log(window.localStorage.getItem('article_add'));
 }
 
 const Redirect = (url) => {
@@ -46,7 +45,7 @@ const Ordinateur = () => {
         async function getArticleData() {
             try {
                 const options = {
-                    url: 'https://localhost:8000/api/articles',
+                    url: 'http://localhost:8000/api/articles',
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',

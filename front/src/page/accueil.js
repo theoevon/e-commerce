@@ -31,13 +31,15 @@ const Accueil = () => {
   useEffect(() => {
     async function getArticleData() {
       try {
+        const token = localStorage.getItem("token");
         const options = {
-          url: 'https://localhost:8000/api/articles',
+          url: 'http://localhost:8000/api/articles',
           method: 'GET',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json;charset=UTF-8'
-          }
+          },
+          body: `Bearer ${token}`
         }
         const response = await axios(options);
         setArticles(response.data);
