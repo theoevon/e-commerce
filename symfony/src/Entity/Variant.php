@@ -9,12 +9,22 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 
 #[ORM\Entity(repositoryClass: VariantRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['article:output']],
     denormalizationContext: ['groups' => ['article:input']],
 )]
+// #[Post(security: "is_granted('ROLE_ADMIN')")]
+// #[GetCollection]
+// #[Get]
+// #[Put(security: "is_granted('ROLE_ADMIN')")]
+// #[Delete(security: "is_granted('ROLE_ADMIN')")]
 class Variant
 {
     #[ORM\Id]
@@ -53,9 +63,6 @@ class Variant
     #[Groups(['article:output', 'article:input'])]
     #[ORM\OneToMany(mappedBy: 'variant', targetEntity: Feature::class)]
     private Collection $feature;
-
-    #[ORM\Column]
-    private ?int $popularity = 0;
 
     public function __construct()
     {
@@ -196,18 +203,6 @@ class Variant
                 $image->setVariant(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getPopularity(): ?int
-    {
-        return $this->popularity;
-    }
-
-    public function setPopularity(int $popularity): self
-    {
-        $this->popularity = $popularity;
 
         return $this;
     }
