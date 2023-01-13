@@ -16,6 +16,7 @@ const Panier = () => {
         document.getElementById("print_" + id).innerHTML = rounded + "$";
         let selector = document.querySelectorAll(".prix_article");
         let compteur = selector.length;
+        console.log(compteur)
         let arr = [];
         for (let i = 0; i < compteur; i++) {
             arr.push(selector[i].innerHTML.substring(0, selector[i].innerHTML.length - 1));
