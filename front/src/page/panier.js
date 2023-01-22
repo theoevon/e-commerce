@@ -74,7 +74,7 @@ const Panier = () => {
     }
 
     const paiement = () => {
-        axios.post('http://localhost:8000/paiement', articles)
+        axios.post('https://localhost:8000/paiement', articles)
     .then(response => window.location.href=response.data);
     }
 
@@ -82,7 +82,7 @@ const Panier = () => {
         async function getArticleData() {
             try {
                 const options = {
-                    url: 'http://localhost:8000/api/articles',
+                    url: 'https://localhost:8000/api/articles',
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',

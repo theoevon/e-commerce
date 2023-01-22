@@ -45,7 +45,7 @@ const Ordinateur = () => {
         async function getArticleData() {
             try {
                 const options = {
-                    url: 'http://localhost:8000/api/articles',
+                    url: 'https://localhost:8000/api/articles',
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
