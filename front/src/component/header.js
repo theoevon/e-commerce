@@ -1,10 +1,18 @@
 import Cookies from 'universal-cookie';
 import { Link } from 'react-router-dom';
 import Search from "./barre_de_recherche.jsx"
+import { useEffect, useState } from 'react';
+
 
 
 const Header = ({ research }) => {
     let cookies = new Cookies();
+    let selector = document.querySelectorAll(".prix_article");
+    let compteur = selector.length;
+    const [quantity, setquantity] = useState() ;
+    useEffect(() => { 
+        setquantity(window.localStorage.getItem("article_add"))
+    })
     
     return (
         <header>
@@ -25,6 +33,7 @@ const Header = ({ research }) => {
                                 <p className="info_icon">Panier</p>
                             </div>
                         </a>
+                        <p className="quantity">{quantity && quantity.split(",").length}</p> 
                         {cookies.get('user_name') !== 'undefind' ? (<p>{cookies.get("user_name")}</p>) : null}
                     </div>
                 </div>
