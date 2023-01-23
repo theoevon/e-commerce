@@ -33,7 +33,7 @@ const Accueil = () => {
       try {
         const token = localStorage.getItem("token");
         const options = {
-          url: 'https://localhost:8000/api/articles',
+          url: 'http://localhost:8000/api/articles',
           method: 'GET',
           headers: {
             'Accept': 'application/json',

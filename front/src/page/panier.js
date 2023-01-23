@@ -75,7 +75,7 @@ const Panier = () => {
     }
 
     const paiement = () => {
-        axios.post('https://localhost:8000/paiement', articles)
+        axios.post('http://localhost:8000/paiement', articles)
     .then(response => window.location.href=response.data);
     }
 
@@ -83,7 +83,7 @@ const Panier = () => {
         async function getArticleData() {
             try {
                 const options = {
-                    url: 'https://localhost:8000/api/articles',
+                    url: 'http://localhost:8000/api/articles',
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
@@ -131,7 +131,7 @@ const Panier = () => {
                                             <th><h1>Prix</h1></th>
                                             <th><h1>Quantité</h1></th>
                                             <th><h1>Prix total</h1></th>
-                                            <th><img src="https://cdn-icons-png.flaticon.com/512/73/73806.png" alt="poubelle" className="croix" onClick={() => SupprimerToutPanier()}></img></th>
+                                            <th><img src="http://cdn-icons-png.flaticon.com/512/73/73806.png" alt="poubelle" className="croix" onClick={() => SupprimerToutPanier()}></img></th>
                                         </tr>
                                     </thead>
                                 }
