@@ -1,11 +1,12 @@
-import '../css/panier.css';
 import Header from '../component/header.js';
 import Footer from '../component/footer.js';
 import React, { useState, useEffect } from 'react';
 import axios from "axios";
+import '../css/panier.css';
 
 const Panier = () => {
     const [articles, setArticles] = useState([]);
+    const [loading, setLoading] = useState(false);
     let prix_ttc = 0;
 
     const Quantite = (e, prix_base) => {
@@ -96,7 +97,7 @@ const Panier = () => {
                     }
                 })
                 setArticles(items);
-
+                setLoading(true);
             }
             catch (error) {
                 console.log(error);
@@ -114,6 +115,7 @@ const Panier = () => {
                         <div className='title'>
                             {typeof localStorage["article_add"] === "undefined" ? <h1>Panier vide</h1> : <h1>Votre panier :</h1>}
                         </div>
+                        {typeof articles[0] === "undefined" && typeof localStorage["article_add"] !== "undefined" ? <img src="https://tradinglatam.com/wp-content/uploads/2019/04/loading-gif-png-4.gif" alt="loading circle" id="loading_circle"></img> : ""}
                         <div className='row'>
                             <table>
                                 {

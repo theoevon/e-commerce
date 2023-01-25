@@ -19,13 +19,13 @@
 }
 
 td {
-    padding: 2rem;
+    padding: 2rem !important;
 
 }
 
 th {
-    color: rgb(160, 160, 160);
-    padding: 2rem;
+    color: rgb(160, 160, 160) !important;
+    padding: 2rem !important;
 }
 
 .border-top {
@@ -39,33 +39,9 @@ table {
     text-align: center;
 }
 
-.input_panier {
-    width: 70px;
-    border: 1px solid black;
-}
-
-.input_panier:focus {
-    outline: 0;
-}
-
 .row_panier {
     display: flex;
     justify-content: center;
-}
-
-.symboles {
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    padding: 1px;
-    background-color: rgb(245, 245, 245);
-}
-
-.left {
-    border-left: 1px solid black;
-}
-
-.right {
-    border-right: 1px solid black;
 }
 
 .box select {
@@ -106,13 +82,20 @@ table {
 .btn {
     margin-top: 3rem;
 }
-.croix{
+
+.croix {
     width: 32px;
 }
-.croix:hover{
+
+.croix:hover {
     filter: invert(21%) sepia(100%) saturate(7414%) hue-rotate(359deg) brightness(94%) contrast(117%);
 }
-.panier{
+
+.panier {
     margin: 0;
     cursor: auto;
+}
+
+.spinner-grow {
+    margin: 0 0.5rem;
 }
