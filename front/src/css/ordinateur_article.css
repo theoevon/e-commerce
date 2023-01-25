@@ -1,0 +1,21 @@
+.container_payement {
+    background-color: rgb(204, 204, 204);
+}
+
+.img-ordinateur-article {
+    object-fit: cover;
+    width: 20vw;
+}
+
+.container-payement-info {
+    background-color: beige;
+    border-radius: 10px;
+    /* display: inline; */
+    height: min-content;
+}
+
+.container_livraison {
+    max-width: 40%;
+    background-color: beige;
+    border-radius: 10px;
+}

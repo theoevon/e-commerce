@@ -11,7 +11,7 @@ const Connexion = () => {
     const sendData = async (e) => {
         e.preventDefault();
 
-        await axios.post("http://localhost:8000/auth", {
+        await axios.post("https://localhost:8000/auth", {
             email: email,
             password: password
         })

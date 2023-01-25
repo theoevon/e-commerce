@@ -66,17 +66,6 @@ footer .text h4 {
   justify-content: center;
 }
 
-.test {
-  background-color: #737176;
-  border: 1px solid black;
-  margin-top: 3%;
-  display: inline-block;
-}
-
-.test a {
-  display: inline;
-}
-
 .container {
   width: 80%;
   margin-left: auto;
