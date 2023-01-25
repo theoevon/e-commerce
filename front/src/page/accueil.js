@@ -13,7 +13,7 @@ const Accueil = () => {
   const addPopularity = (article) => {
     async function data() {
       const options_01 = {
-        url: 'https://localhost:8000/api/articles/' + article.id,
+        url: 'http://localhost:8000/api/articles/' + article.id,
         method: 'GET',
         headers: {
           'Accept': 'application/json',
@@ -22,7 +22,7 @@ const Accueil = () => {
       }
       const response_01 = await axios(options_01);
       const popularity = response_01.data.popularity + 1;
-      const response_02 = await axios.put('https://localhost:8000/api/articles/' + article.id , {popularity: popularity});
+      const response_02 = await axios.put('http://localhost:8000/api/articles/' + article.id , {popularity: popularity});
       window.location.href = "/article/"+ article.category.name + "/" + article.id
     }
     data()
@@ -73,13 +73,13 @@ const Accueil = () => {
                     </div>
                     <div className="row_article">
                       <div className="text">
-                        <h2>{article.name}</h2>
+                        <h2 className='pointer'>{article.name}</h2>
                         <span>
                           {article.description}
                         </span>
                         <p>{article.variant[0].price}$</p>
                         <br></br><br></br><br></br>
-                        <p>DÉCOUVRIR &gt;</p>
+                        <p className='pointer'>DÉCOUVRIR &gt;</p>
                       </div>
                     </div>
                   </div>

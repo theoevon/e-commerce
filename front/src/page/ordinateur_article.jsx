@@ -4,6 +4,25 @@ import React, { useEffect, useState } from 'react'
 import axios from "axios";
 import { useParams } from 'react-router-dom'
 
+const AjouterPanier = (event) => {
+    if(typeof localStorage["article_add"] === "undefined"){
+        let arr = [];
+        arr.push(event.target.id);
+        window.localStorage.setItem('article_add', arr);
+    }
+    else{
+        let value_local = window.localStorage.getItem('article_add');
+        let tab = value_local.split(',');
+        if(tab.includes(event.target.id) === false){
+            tab.push(event.target.id);
+            window.localStorage.setItem('article_add', tab);
+        }
+        else{
+            alert("L'article est déjà dans votre panier !");
+        }
+    }
+}
+
 const Ordinateur_article = () => {
     let { id } = useParams();
 
@@ -11,12 +30,13 @@ const Ordinateur_article = () => {
     const [uuid, setUuid] = useState(null);
     const [price, setPrice] = useState(null);
     const [description, setDescription] = useState(null);
+    const [article_id , setId] = useState(null)
 
     useEffect(() => {
         async function getArticleData() {
             try {
                 const options = {
-                    url: 'https://localhost:8000/api/articles/' + id,
+                    url: 'http://localhost:8000/api/articles/' + id,
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json',
@@ -28,6 +48,7 @@ const Ordinateur_article = () => {
                 setUuid(response.data.variant[0].images[0].uuid);
                 setPrice(response.data.variant[0].price)
                 setDescription(response.data.description)
+                setId(response.data.id)
             }
             catch (error) {
                 console.log(error);
@@ -73,11 +94,11 @@ const Ordinateur_article = () => {
                                         </div>
                                     </div>
                                     <div className='flex center mg-top-10'>
-                                        <button className='btn'>AJOUTER AU PANIER</button>
+                                        <button className='btn pointer' id={article_id} onClick={(e) => AjouterPanier(e)}>AJOUTER AU PANIER</button>
                                     </div>
                                 </div>
                             </div>
-                            <div className='container_point_fort mg-left-4'>
+                            <div className='container_point_fort mg-left-4 pointer'>
                                 <p>LES POINT FORTS</p>
                                 <p>{description}</p>
                             </div>
