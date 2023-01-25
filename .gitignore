@@ -8,6 +8,7 @@
 /symfony/public/bundles/
 /symfony/var/
 /symfony/vendor/
+ e_commerce.pdf
 ###< symfony/framework-bundle ###
 
 ###> phpunit/phpunit ###
